@@ -1,0 +1,128 @@
+.testimonial-wrapper{
+  background: var(--bg-main);
+  margin: 10px 0;
+
+}
+.testimonial {
+  display: flex;
+  align-items: center;
+  gap: 12%;
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Image */
+.testimonial-img img {
+  width: 260px;
+  height: 100%;
+  max-height: 350px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Content */
+.testimonial-content {
+  flex: 1;
+}
+
+/* Text */
+.testimonial-text {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin-bottom: 25px;
+  font-style: var(--text-italic);
+}
+
+/* Author */
+.testimonial-author h4 {
+  color: var(--primary-color);
+  margin-bottom: 4px;
+  font-size: var(--text-lg);
+}
+
+.testimonial-author span {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+/* Footer (logos + link) */
+.testimonial-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Logos */
+.testimonial-logos {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+.testimonial-logos svg {
+  font-size: var(--text-lg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.testimonial-logos svg:hover {
+  color: var(--primary-dark);
+  transform: scale(1.2);
+}
+
+/* Link */
+.testimonial-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: var(--font-semibold);
+  transition: 0.3s;
+}
+
+.testimonial-content a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .testimonial {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .testimonial-footer{
+    display: block;
+    text-align: center;
+  }
+  .testimonial-logos{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .testimonial-img{
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonial-img img {
+    width: 200px;
+    height: 100%;
+    max-height: 300px;
+    margin-bottom: 20px;
+  }
+  .testimonial-footer{
+    display: block;
+    text-align: center;
+  }
+  .testimonial-logos{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+}

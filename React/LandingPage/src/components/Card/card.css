@@ -1,0 +1,29 @@
+.card {
+  border-radius: 10px;
+}
+
+/* Blog specific */
+.card.blog img {
+  width: 100%;
+}
+
+/* Community specific */
+.community-card {
+  text-align: center;
+  padding: 25px;
+  border-radius: 12px;
+  background: var(--bg-white);
+  transition: 0.3s;
+
+}
+
+.community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.community-icon {
+  font-size: var(--text-1xl);
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}

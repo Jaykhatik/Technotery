@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basics of Advanced Functions</title>
+</head>
+
+<body>
+    <!-- 
+    ->Advanced Functions in JavaScript are extremely important to understand how 
+      JS works internally (closures, callbacks, async behavior, etc.).
+
+            1 Functions as First Class Citizens
+            2 Higher Order Functions
+            3 Callback Functions
+            4 Arrow Functions
+            5 Anonymous Functions
+            6 IIFE
+            7 Closures
+            8 Lexical Scope
+            9 Currying
+            10 Pure Functions
+            11 Recursion
+            12 Default Parameters
+            13 Rest Parameters
+            14 call apply bind
+            15 Generator Functions
+            16 Async Functions
+            17 Debouncing
+            18 Throttling
+    -->
+    <script>
+        /*
+        Functions as First Class Citizens:-
+            -> In js ,functions are first-class citizens meaning:
+              i) Functions can be stored in variables
+             ii) Functions can be stored in objects and arrays 
+            iii) Functions can be returned from other functions
+        
+        */
+
+        //function stored in variable
+        const greet = function () {
+            console.log("hello");
+        }
+        greet()
+
+        //Functions can be stored in objects 
+        const user = {
+            name: "jay",
+            city: function () {
+                console.log(`my name is ${this.name} and i am from Rajasthan`);
+            }
+        }
+        user.city();
+
+
+        //Functions can be stored in Arrays
+        const arr = [
+            function () { console.log("a") },
+            function () { console.log("b") }
+        ]
+        console.log(arr[0])
+        console.log(arr[1])
+
+    </script>
+</body>
+
+</html>

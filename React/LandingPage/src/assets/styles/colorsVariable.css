@@ -1,0 +1,44 @@
+:root {
+
+  /* =========================
+     🎯 PRIMARY COLORS
+  ========================= */
+  --primary-color: #4CAF4F;
+  --primary-dark: #388E3C;
+  --primary-light: #81C784;
+
+  /* =========================
+     🎯 BACKGROUND COLORS
+  ========================= */
+  --bg-main: #F5F7FA;
+  --bg-white: #FFFFFF;
+  --bg-dark: #263238;
+  --bg-section: #F9FAFB;
+
+  /* =========================
+     🎯 TEXT COLORS
+  ========================= */
+  --text-primary: #263238;
+  --text-secondary: #717171;
+  --text-light: #FFFFFF;
+  --text-muted: #89939E;
+
+  /* =========================
+     🎯 BUTTON COLORS
+  ========================= */
+  --btn-bg: var(--primary-color);
+  --btn-text: #FFFFFF;
+  --btn-hover: #43A047;
+  --btn-secondary-bg: #E8F5E9;
+  --btn-secondary-text: #4CAF4F;
+
+  /* =========================
+     🎯 FOOTER
+  ========================= */
+  --footer-bg: #263238;
+  --footer-text: #FFFFFF;
+  --footer-text-muted: #B0BEC5;
+  --footer-icon-bg:#3b4a50;
+
+
+}

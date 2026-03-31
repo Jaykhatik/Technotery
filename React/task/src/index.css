@@ -1,0 +1,268 @@
+
+/* CSS Custom Properties for better maintainability */
+:root {
+  --primary-bg: #f5f7fb;
+  --sidebar-bg-start: #1e293b;
+  --sidebar-bg-end: #0f172a;
+  --sidebar-text: #cbd5f5;
+  --sidebar-hover: #334155;
+  --sidebar-active: #3b82f6;
+  --header-bg: #ffffff;
+  --header-shadow: rgba(0, 0, 0, 0.08);
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+  --footer-border: #eee;
+  --scrollbar-thumb: #94a3b8;
+  --text-primary: #1e293b;
+  --text-secondary: #555;
+  --text-muted: #777;
+}
+
+/* Reset */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-bg);
+  line-height: 1.6; /* Improved readability */
+}
+
+/* Layout */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* 🔥 Sidebar */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, var(--sidebar-bg-start), var(--sidebar-bg-end));
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.sidebar a {
+  padding: 12px 15px;
+  margin: 8px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--sidebar-text);
+  transition: all 0.3s ease;
+  display: block; /* Ensure block display for better hover */
+}
+
+.sidebar a:hover {
+  background: var(--sidebar-hover);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.sidebar a.active {
+  background: var(--sidebar-active);
+  color: #fff;
+}
+
+/* 🔥 Main Section */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔥 Header */
+.header {
+  background: var(--header-bg);
+  padding: 18px 25px;
+  box-shadow: 0 2px 8px var(--header-shadow);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 🔥 Content */
+.content {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto; /* Added for scrolling if content overflows */
+}
+
+.content h2 {
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.content p {
+  color: var(--text-secondary);
+}
+
+/* Example Card */
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--card-shadow);
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Enhanced transition */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--card-shadow); /* Deeper shadow on hover */
+}
+
+/* 🔥 Footer */
+.footer {
+  background: var(--header-bg);
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--footer-border);
+}
+
+/* 🔥 Scrollbar (modern look) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sidebar-hover); /* Consistent hover color */
+}
+
+/* 🔥 Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .header {
+    font-size: 16px;
+    padding: 15px 20px; /* Adjusted padding */
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    position: fixed; /* Make sidebar overlay on mobile */
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
+/* Page background */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f1f5f9;
+}
+
+/* 🔥 Card (Main container of chart) */
+.card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  margin-top: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow border effect */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(120deg, #3b82f6, #6366f1, #8b5cf6);
+  mask-composite: exclude;
+}
+
+/* Title */
+.card h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+}
+
+/* Chart wrapper (center align) */
+.recharts-wrapper {
+  margin: auto;
+}
+
+/* Tooltip styling */
+.recharts-tooltip-wrapper {
+  border-radius: 10px !important;
+}
+
+/* Grid lines lighter */
+.recharts-cartesian-grid line {
+  stroke: #e2e8f0;
+}
+
+/* Axis text */
+.recharts-text {
+  fill: #64748b;
+  font-size: 12px;
+}
+
+/* Line smooth style */
+.recharts-line path {
+  stroke-width: 3;
+  filter: drop-shadow(0px 4px 6px rgba(59, 130, 246, 0.3));
+}
+
+/* Dot style */
+.recharts-dot {
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+/* 🔥 Responsive */
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+}

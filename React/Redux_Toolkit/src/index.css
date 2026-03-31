@@ -1,0 +1,13 @@
+@import "tailwindcss";
+div{
+    text-align: center;
+}
+button,input{
+    padding: 10px;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+h1{
+    font-size: 50px;
+    margin-top: 60px;
+}

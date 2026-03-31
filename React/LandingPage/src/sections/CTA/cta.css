@@ -1,0 +1,45 @@
+.cta {
+  background: var(--bg-main);
+  padding: 40px 0px;
+  text-align: center;
+}
+
+.cta-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Heading */
+.cta h1 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
+
+
+/* ========== Responsive ========== */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .cta h1 {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .cta {
+    padding: 60px 15px;
+  }
+
+  .cta h1 {
+    font-size: var(--text-xl);
+  }
+
+  .cta-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function in Advanced</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Definition :-
+            ->An Arrow Function is a shorter syntax for writing functions in JavaScript introduced in ES6 (2015).
+            ->It allows you to write cleaner and shorter functions.
+        */
+
+        //simple
+        let simple = () => {
+            console.log("hello i am simple function");
+        }
+        simple()
+
+        //arrow function with parameter
+        const square = (a) => {
+            return a * a;
+        }
+        console.log(square(20));
+
+        //Arrow Function with Implicit Return :-If the function has only one expression, you can remove {} and return.
+        const sum = (a, b) => a + b;
+        console.log(sum(6, 9));
+
+        //Arrow Function Returning Objects :- If returning an object, wrap it with parentheses.
+
+        const obj = () => ({
+            name: "rahul",
+            city: "surat"
+        })
+        console.log(obj())
+        console.log(obj().name)
+        console.log(obj().city)
+
+        //Arrow Function with Array Methods
+        //map
+        const arr = [2, 4, 8, 10];
+        let result = arr.map((n) => {
+            return n * 2
+        })
+        console.log(result)
+
+        //filter
+        const arr1 = [2, 4, 8, 10];
+        let result1 = arr1.filter((n) => {
+            return n >= 10
+        })
+        console.log(result1)
+
+        //reduce
+        const arr2 = [2, 4, 8, 10];
+        let result2 = arr2.reduce((n1, n2) => {
+            return n1 + n2
+        })
+        console.log(result2)
+
+        //forEach
+        const fruits = ["apple", "mango", "banana", "orange"]
+        fruits.forEach((fruit) => {
+            console.log(fruit)
+        })
+
+
+
+
+        //Arrow Functions and this (VERY IMPORTANT)
+        //->Arrow functions do NOT have their own this.
+        //->They take this from their parent scope (lexical scope).
+
+        const person = {
+            name: "hardik",
+            show() {
+                console.log(`my name is ${this.name}`);
+            }
+        }
+        person.show();
+
+
+
+        //Arrow Functions in setTimeout :- if we have to use the use the normal function method with settimout then this works
+        const user = {
+            fullName: "samay raina",
+            show: function () {
+                setTimeout(() => {
+                    console.log(this.fullName);
+                })
+            }
+        }
+        user.show()
+
+        //Arrow Functions Do Not Have arguments
+        //=>they use rest parameter for passing argumnets
+
+        const test1 = (...args) => {
+            console.log(args)
+        }
+        test1(2, 6, 9, 34)
+
+
+        //arrow function cannot be hoisted
+
+
+
+        //full example
+        const student = [
+            { name: "jay", marks: 90 },
+            { name: "rahul", marks: 80 },
+            { name: "hardik", marks: 50 }
+        ]
+        let res = student
+            .filter((m) => m.marks >= 75)
+            .map((m) => m.name)
+        console.log(res)
+
+    </script>
+</body>
+
+</html>

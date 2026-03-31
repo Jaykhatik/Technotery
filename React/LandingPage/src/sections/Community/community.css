@@ -1,0 +1,87 @@
+.community {
+  text-align: center;
+  padding: 60px 8%;
+  background: var(--bg-main);
+}
+
+.community h2 {
+  font-size: var(--text-1xl);
+  color: var(--text-primary);
+}
+
+.community p {
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-size: var(--text-md);
+}
+
+/* Cards */
+.community-cards {
+  display: flex;
+  padding: 10px;
+  gap: 10%;
+  margin-top: 60px;
+  justify-content: center;
+}
+
+/* Card */
+.community-card {
+  background: var(--bg-white);
+  padding: 30px 20px;
+  width: 280px;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.community-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-white);
+  color: var(--primary-color);
+  font-size: var(--text-xl);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+  margin: 0 auto 20px;
+}
+
+.community-card h3 {
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.community-card p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .community-cards {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .community h2 {
+    font-size: var(--text-xl);
+  }
+
+  .community-card {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}

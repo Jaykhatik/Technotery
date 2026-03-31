@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>simple Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .box {
+            width: 220px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+        }
+
+        #display {
+            width: 200px;
+            height: 40px;
+            font-size: 22px;
+            text-align: right;
+            border: none;
+            outline: none;
+        }
+
+        #origin {
+            width: 200px;
+            height: 25px;
+            font-size: 16px;
+            text-align: right;
+            border: none;
+            outline: none;
+            color: gray;
+        }
+
+        button {
+            width: 45px;
+            height: 40px;
+            font-size: 18px;
+            margin: 3px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>simple Calculator</h2>
+
+    <div class="box">
+        <input type="text" id="display" readonly value="0">
+        <input type="text" id="origin" readonly value="0">
+    </div>
+
+    <br>
+
+    <button onclick="setOp('%')">%</button>
+    <button onclick="delLast()">Del</button>
+
+    <br>
+
+    <button onclick="clicked(7)">7</button>
+    <button onclick="clicked(8)">8</button>
+    <button onclick="clicked(9)">9</button>
+    <button onclick="setOp('+')">+</button>
+
+    <br>
+
+    <button onclick="clicked(4)">4</button>
+    <button onclick="clicked(5)">5</button>
+    <button onclick="clicked(6)">6</button>
+    <button onclick="setOp('-')">-</button>
+
+    <br>
+
+    <button onclick="clicked(1)">1</button>
+    <button onclick="clicked(2)">2</button>
+    <button onclick="clicked(3)">3</button>
+    <button onclick="setOp('*')">*</button>
+
+    <br>
+
+    <button onclick="clicked(0)">0</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="clearAll()">C</button>
+    <button onclick="setOp('/')">/</button>
+
+    <script>
+
+        let numbers = [];
+        let operators = [];
+        let currentNumber = "";
+        let multiop = "";
+
+        function showDis() {
+            document.getElementById("display").value = multiop || 0;
+        }
+
+        function clicked(n) {
+
+            currentNumber += n;
+            multiop += n;
+
+            showDis();
+
+        }
+
+        function setOp(o) {
+
+            if (currentNumber === "") return;
+
+            numbers.push(Number(currentNumber));
+            operators.push(o);
+
+            multiop += o;
+
+            currentNumber = "";
+
+            showDis();
+
+        }
+
+        function calculate() {
+
+            if (currentNumber !== "") {
+                numbers.push(Number(currentNumber));
+            }
+
+            let result = numbers[0];
+
+            for (let i = 0; i < operators.length; i++) {
+
+                let newtNum = numbers[i + 1];
+
+                switch (operators[i]) {
+
+                    case '+':
+                        console.log(result += newtNum);
+                        break;
+
+                    case '-':
+                        console.log(result -= newtNum);
+                        break;
+
+                    case '*':
+                        console.log(result *= newtNum);
+                        break;
+
+                    case '/':
+                        console.log(result /= newtNum);
+                        break;
+
+                    case '%':
+                        console.log(result %= newtNum);
+                        break;
+
+                }
+
+            }
+
+            document.getElementById("origin").value = document.getElementById('display').value;
+            document.getElementById('origin').value = result;
+
+            numbers = [];
+            operators = [];
+            currentNumber = result.toString();
+            multiop = result.toString();
+
+        }
+
+        function clearAll() {
+
+            numbers = [];
+            operators = [];
+            currentNumber = "";
+            multiop = "";
+
+            document.getElementById("display").value = 0;
+            document.getElementById("origin").value = 0;
+
+        }
+
+        function delLast() {
+
+            multiop = multiop.slice(0, -1);
+            showDis();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

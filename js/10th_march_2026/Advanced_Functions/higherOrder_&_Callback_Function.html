@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher Order and Callback Function </title>
+</head>
+
+<body>
+    <script>
+        /*
+
+        Higher Order Function:
+
+        Definition :-
+            ->A higher order function is a function that takes another function as an arguument or returns a function.
+        */
+
+        //function returning function
+        function outer() {
+            return function inner() {
+                console.log("hello from inner function");
+            }
+        }
+        let result = outer();
+        result()
+
+        //function as arguments
+        function abcd(val) {
+            return val();
+        }
+        abcd(function () {
+            console.log("h i am function as an argument");
+        })
+
+
+
+
+        /*
+
+       Callback Function:
+
+       Definition :-
+           ->A Callback function is a function that is passed as an argument to another function and executed later.
+       */
+        function greet(name) {
+            console.log("hello " + name)
+        }
+        function processUser(callback) {
+            const name = "jay";
+            callback(name);
+        }
+        processUser(greet);//so here the greet is called when the processUser function invoked
+
+
+    </script>
+</body>
+
+</html>

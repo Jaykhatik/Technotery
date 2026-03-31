@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures and Lexical scope in JS</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Closures :-
+        ->A closure is created when a function remembers variables from its outer(lexical)scope,even after the outer function
+          has finished executing.
+        */
+
+        //example-1
+        function outer() {
+            let a = 10;
+            return function inner() {
+                console.log(a)
+            }
+        }
+        let res = outer()
+        res()//because the outer function give the function inner so when we store the outer in result the the result becomes the function
+
+        //example-2
+        function counter() {
+            let count = 0;
+
+            return function () {
+                count++;
+                console.log(count);
+            }
+        }
+
+        const c1 = counter();
+
+        c1();
+        c1();
+        c1();
+    </script>
+    <script>
+        /*
+        Lexical scope:-
+            ->Lexical scope means a function can access variables from its parent scope.
+            ->in simple words scope determined by where variables are written in code.
+        */
+        function name() {
+            let name = "jay";
+            function get() {
+                console.log(name);
+            }
+            get();
+        }
+        name()
+        //  let operations = {
+        //     "+": (a, b) => a + b,
+        //     "-": (a, b) => a - b,
+        //     "*": (a, b) => a * b,
+        //     "/": (a, b) => a / b,
+        //     "%": (a, b) => a % b
+        // };
+
+        // function calculate() {
+
+        //     let a = Number(n1);
+        //     let b = Number(n2);
+
+        //     let result = operations[op](a, b);
+
+        //     console.log(result);
+
+        //     document.getElementById("display").value = result;
+
+        //     n1 = result.toString();
+        //     n2 = "";
+        //     op = "";
+        // }
+    </script>
+</body>
+
+</html>

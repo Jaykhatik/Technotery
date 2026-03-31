@@ -1,0 +1,23 @@
+
+.header-div {
+  background-color: #4a4f55;
+  height: 70px;
+  padding: 20px 40px;
+  color: #fff;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.content{
+    background-color: gray;
+    border-radius: 20px;
+    margin: 20px;
+    height: 120px;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

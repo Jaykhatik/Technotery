@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .box {
+            width: 220px;
+            height: 60px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+        }
+
+        #origin {
+            width: 200px;
+            height: 25px;
+            font-size: 16px;
+            text-align: right;
+            border: none;
+            outline: none;
+            color: gray;
+        }
+
+        #display {
+            width: 200px;
+            height: 40px;
+            font-size: 22px;
+            text-align: right;
+            margin-bottom: 10px;
+            border: none;
+            outline: none;
+        }
+
+
+        button {
+            width: 45px;
+            height: 40px;
+            font-size: 18px;
+            margin: 3px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Simple Calculator</h2>
+    <div class="box">
+
+        <input type="text" id="display" readonly value="0">
+        <input type="text" id="origin" value="0" readonly>
+    </div>
+
+
+
+    <br>
+
+    <button onclick="setOp('%')">%</button>
+    <button onclick="delLast()">Del</button>
+
+
+
+    <br>
+
+    <button onclick="clicked(7)">7</button>
+    <button onclick="clicked(8)">8</button>
+    <button onclick="clicked(9)">9</button>
+    <button onclick="setOp('+')">+</button>
+
+    <br>
+
+    <button onclick="clicked(4)">4</button>
+    <button onclick="clicked(5)">5</button>
+    <button onclick="clicked(6)">6</button>
+    <button onclick="setOp('-')">-</button>
+
+    <br>
+
+    <button onclick="clicked(1)">1</button>
+    <button onclick="clicked(2)">2</button>
+    <button onclick="clicked(3)">3</button>
+    <button onclick="setOp('*')">*</button>
+
+    <br>
+
+    <button onclick="clicked(0)">0</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="clearAll()">C</button>
+    <button onclick="setOp('/')">/</button>
+
+    <script>
+        let n1 = "";
+        let n2 = "";
+        let op = "";
+
+        function showDis() {
+            if (op === "") {
+                document.getElementById('display').value = n1;
+
+            }
+            else {
+                document.getElementById('display').value = n1 + op + n2;
+            }
+        }
+        function delLast() {
+            if (n2 !== "") {
+                n2 = n2.slice(0, -1);
+                console.log(n2)
+            }
+            else if (op !== "") {
+                op = "";
+            }
+            else {
+                n1 = n1.slice(0, -1);
+                console.log(n1)
+            }
+            showDis()
+        }
+        function clearAll() {
+            document.getElementById('display').value = 0;
+            document.getElementById('origin').value = 0;
+            n1 = ""
+            n2 = ""
+
+            op = ""
+
+            showDis()
+        }
+        function clicked(n) {
+
+            if (op === "") {
+                n1 = n1 + n
+
+            }
+            else {
+                n2 = n2 + n
+            }
+            showDis()
+
+        }
+
+        function setOp(o) {
+
+            if (n1 === "") return;
+
+            if (n2 !== "") {
+                calculate();
+            }
+
+            op = o;
+
+            showDis();
+        }
+
+
+
+        function calculate() {
+
+            let a = Number(n1)
+            let b = Number(n2)
+            let result = 0;
+
+            // if (op == "+") {
+            //     console.log(result = a + b)
+            // }
+
+            // else if (op == "-") {
+            //     console.log(result = a - b)
+            // }
+
+            // else if (op == "*") {
+            //     console.log(result = a * b)
+            // }
+
+            // else if (op == "/") {
+            //     console.log(result = a / b)
+            // }
+            // else if (op == '%') {
+            //     console.log(result = a % b)
+            // }
+            // else {
+            //     result = 0;
+            // }
+
+
+
+            switch (op) {
+                case '+':
+                    console.log(result = a + b)
+                    break;
+                case '-':
+                    console.log(result = a - b)
+                    break;
+                case '*':
+                    console.log(result = a * b)
+                    break;
+                case '/':
+                    console.log(result = a / b)
+                    break;
+                case '%':
+                    console.log(result = a % b)
+                    break;
+
+                default:
+                    console.log(result = 0)
+                    break;
+            }
+            document.getElementById("origin").value = document.getElementById('display').value;
+            document.getElementById('origin').value = result;
+            n1 = result.toString();
+            n2 = "";
+            op = "";
+
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

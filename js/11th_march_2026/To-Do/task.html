@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <style>
+        .container {
+            margin: 0px auto;
+            border: 1px solid black;
+            width: max-content;
+            padding: 20px;
+        }
+
+        .upper-sec {
+            display: flex;
+            gap: 20px;
+        }
+
+        .upper-sec input {
+            width: 250px;
+            height: 30px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="upper-sec">
+            <input type="text" id="data">
+            <button onclick="addBtn()">Add</button>
+            <p id="counting">Count : 0 </p>
+        </div>
+        <div class="lower-sec">
+            <button onclick="completedList()">completed</button>
+            <button onclick="pendingList()">pending</button>
+        </div>
+        <div>
+            <ul id="items-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        let list = document.getElementById('items-list')//
+        let counting = document.getElementById('counting')//
+
+
+        function countTask() {
+            let total = list.children.length;
+            console.log(list,'list');
+            
+            counting.innerText = "Count : " + total;
+        }
+
+        function addBtn() {
+
+            let task = document.getElementById('data').value;
+            if (task === "") {
+                alert("please enter the task");
+                return;
+            }
+            console.log(task)
+
+
+            let li = document.createElement("li");
+            let delBtn = document.createElement("button");
+            li.innerText = task;
+            delBtn.innerText = "Delete";
+            let checkbox = document.createElement("input")
+            checkbox.type = "checkbox"
+            console.log(checkbox)
+            li.prepend(checkbox)
+            list.appendChild(li);
+            li.appendChild(delBtn);
+            console.log(li)
+            delBtn.addEventListener("click", function () {
+                list.removeChild(li);
+                countTask()
+            });
+            checkbox.addEventListener("change", function () {
+                if (checkbox.checked) {
+                    li.classList.add("completed");
+                    console.log(li)
+                } else {
+                    li.classList.remove("completed");
+                    console.log(li)
+                }
+            });
+
+            document.getElementById('data').value = "";
+            countTask()
+
+        }
+
+
+
+
+
+        function completedList() {
+
+            let tasks = list.children;
+
+            for (let i = 0; i < tasks.length; i++) {
+
+                if (tasks[i].classList.contains("completed")) {
+                    tasks[i].style.display = "list-item";
+                } else {
+                    tasks[i].style.display = "none"
+                }
+
+            }
+
+        }
+
+        function pendingList() {
+            let tasks = list.children;
+            for (let i = 0; i < tasks.length; i++) {
+                if (!tasks[i].classList.contains("completed")) {
+                    tasks[i].style.display = "list-item";
+                }
+                else {
+                    tasks[i].style.display = "none"
+                }
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
