@@ -1,0 +1,218 @@
+/* ===== DASHBOARD HEADER ===== */
+.dashboard {
+  width: 100%;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+}
+
+.dashboard-header p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* ===== STATS GRID ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  font-size: 32px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, rgba(194, 59, 10, 0.1) 0%, rgba(194, 59, 10, 0.05) 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-content h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px 0;
+}
+
+.stat-change {
+  font-size: 12px;
+  color: #c23b0a;
+  font-weight: 500;
+}
+
+/* ===== DASHBOARD SECTION ===== */
+.dashboard-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #e8e8e8;
+}
+
+.dashboard-section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+}
+
+/* ===== ORDERS TABLE ===== */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table thead {
+  background: #f8f8f8;
+}
+
+.orders-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.orders-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #333;
+}
+
+.orders-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: #f8f8f8;
+}
+
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.badge.pending {
+  background: rgba(255, 193, 7, 0.1);
+  color: #f39c12;
+}
+
+.badge.completed {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.badge.shipping {
+  background: rgba(33, 150, 243, 0.1);
+  color: #2196f3;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .orders-table {
+    font-size: 12px;
+  }
+
+  .orders-table th,
+  .orders-table td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .orders-table thead {
+    display: none;
+  }
+
+  .orders-table tbody tr {
+    display: block;
+    border: 1px solid #e8e8e8;
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+
+  .orders-table td {
+    display: block;
+    text-align: right;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .orders-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 700;
+    color: #888;
+  }
+}
