@@ -11,6 +11,7 @@ import Dashboard from '../../Seller/Pages/Dashboard/Dashboard'
 import AdminLayout from '../../Admin/Layout/AdminLayout'
 import AdminDashboard from '../../Admin/Pages/Dashboard/Dashboard'
 import SellerLayout from '../../Seller/Layout/SellerLayout'
+import Orders from '../../Admin/Pages/Orders/Order'
 
 function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ function AppRoutes() {
         <Route path='/login' element={<><Header /><Login /><Footer /></>} />
         <Route path='/admin' element={<AdminLayout />}>
           <Route path='dashboard' element={<AdminDashboard />} />
+          <Route path='orders' element={<Orders/>}/>
         </Route>
         <Route path='/seller' element={< SellerLayout/>}>
           <Route path='dashboard' element={<Dashboard/>} />

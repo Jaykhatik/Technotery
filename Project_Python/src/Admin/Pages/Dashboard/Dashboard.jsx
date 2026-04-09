@@ -38,7 +38,7 @@ function AdminDashboard() {
         <div className="stat-card">
           <div className="stat-icon">👥</div>
           <div className="stat-content">
-            <h3>Total Customers</h3>
+            <h3>Total Sellers</h3>
             <p className="stat-value">1,256</p>
             <span className="stat-change">+45 this month</span>
           </div>
