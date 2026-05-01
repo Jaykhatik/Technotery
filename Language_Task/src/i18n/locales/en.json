@@ -1,0 +1,26 @@
+{
+  "Login": {
+    "logoText": "MyLogo",
+    "langEnglish": "English",
+    "langArabic": "Arabic (العربية)",
+    "loginTab": "Login",
+    "signupTab": "Sign Up",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "loginBtn": "Sign in",
+    "fullNameLabel": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "signupBtn": "Create account",
+    "infoTitle": "Welcome to Our Platform",
+    "infoSubtitle": "Join thousands of users discovering the best solutions for their business needs today.",
+    "infoFeature1": "Secure & Reliable",
+    "infoFeature2": "Real-time Analytics",
+    "infoFeature3": "24/7 Support"
+  }
+}

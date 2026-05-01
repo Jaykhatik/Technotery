@@ -1,6 +1,9 @@
 import React from 'react'
 import './Dashboard.css'
 
+// ✅ React Icons
+import { FaChartBar, FaBox, FaShoppingCart, FaUsers } from "react-icons/fa";
+
 function AdminDashboard() {
   
   return (
@@ -8,8 +11,9 @@ function AdminDashboard() {
 
       {/* ===== STATS CARDS ===== */}
       <div className="stats-grid">
+
         <div className="stat-card">
-          <div className="stat-icon">📊</div>
+          <div className="stat-icon"><FaChartBar /></div>
           <div className="stat-content">
             <h3>Total Sales</h3>
             <p className="stat-value">R$ 45,230</p>
@@ -18,36 +22,38 @@ function AdminDashboard() {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">📦</div>
+          <div className="stat-icon"><FaBox /></div>
           <div className="stat-content">
             <h3>Total Products</h3>
-            <p className="stat-value">342</p>
+            <p className="stat-value">32</p>
             <span className="stat-change">+8 new this week</span>
           </div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">🛒</div>
+          <div className="stat-icon"><FaShoppingCart /></div>
           <div className="stat-content">
             <h3>Pending Orders</h3>
-            <p className="stat-value">28</p>
-            <span className="stat-change">5 urgent</span>
+            <p className="stat-value">8</p>
+            <span className="stat-change">2 urgent</span>
           </div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">👥</div>
+          <div className="stat-icon"><FaUsers /></div>
           <div className="stat-content">
             <h3>Total Sellers</h3>
-            <p className="stat-value">1,256</p>
-            <span className="stat-change">+45 this month</span>
+            <p className="stat-value">12</p>
+            <span className="stat-change">+4 this month</span>
           </div>
         </div>
+
       </div>
 
       {/* ===== RECENT ORDERS ===== */}
       <div className="dashboard-section">
         <h2>Recent Orders</h2>
+
         <table className="orders-table">
           <thead>
             <tr>
@@ -59,6 +65,7 @@ function AdminDashboard() {
               <th>Date</th>
             </tr>
           </thead>
+
           <tbody>
             <tr>
               <td>#ORD-001</td>
@@ -68,6 +75,7 @@ function AdminDashboard() {
               <td><span className="badge pending">Pending</span></td>
               <td>2025-04-06</td>
             </tr>
+
             <tr>
               <td>#ORD-002</td>
               <td>Jane Smith</td>
@@ -76,6 +84,7 @@ function AdminDashboard() {
               <td><span className="badge completed">Completed</span></td>
               <td>2025-04-05</td>
             </tr>
+
             <tr>
               <td>#ORD-003</td>
               <td>Mike Wilson</td>
@@ -85,10 +94,12 @@ function AdminDashboard() {
               <td>2025-04-04</td>
             </tr>
           </tbody>
+
         </table>
       </div>
+
     </div>
   )
 }
 
-export default AdminDashboard
+export default AdminDashboard;

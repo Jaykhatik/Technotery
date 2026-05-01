@@ -1,0 +1,26 @@
+{
+  "Login":{
+    "logoText": "شِعاري",
+    "langEnglish": "الإنجليزية (English)",
+    "langArabic": "العربية",
+    "loginTab": "تسجيل الدخول",
+    "signupTab": "إنشاء حساب",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "loginBtn": "تسجيل الدخول",
+    "fullNameLabel": "الاسم الكامل",
+    "fullNamePlaceholder": "أدخل اسمك الكامل",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "signupBtn": "إنشاء حساب",
+    "infoTitle": "مرحباً بك في منصتنا",
+    "infoSubtitle": "انضم إلى آلاف المستخدمين الذين يكتشفون أفضل الحلول لاحتياجات أعمالهم اليوم.",
+    "infoFeature1": "آمن وموثوق",
+    "infoFeature2": "تحليلات في الوقت الفعلي",
+    "infoFeature3": "دعم على مدار الساعة"
+  }
+}

@@ -7,7 +7,8 @@ export const getAxiosInstance=(baseURL)=>{
     return axios.create({
         baseURL:baseURL,
         headers:{
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            
         }
     })
 }

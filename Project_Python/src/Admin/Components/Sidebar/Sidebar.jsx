@@ -3,8 +3,21 @@ import "./Sidebar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Website/Contexts/AuthContext";
 
+// ✅ React Icons
+import {
+  FiGrid,
+  FiShoppingCart,
+  FiTag,
+  FiBox,
+  FiHome,
+  FiSettings,
+  FiLogOut,
+  FiChevronLeft,
+  FiChevronRight
+} from "react-icons/fi";
+
 function Sidebar({ isCollapsed, onToggleCollapse }) {
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,14 +26,22 @@ function Sidebar({ isCollapsed, onToggleCollapse }) {
     navigate("/login");
   };
 
-  const menuItems = [
-    { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
-    { path: "/admin/orders", label: "Orders", icon: "🛒" },
-    { path: "/admin/categories", label: "Categories", icon: "🏷️" },
-    { path: "/admin/products", label: "Products", icon: "📦" },
-    { path: "/admin/sellers", label: "Sellers", icon: "🏪" },
-    { path: "/admin/settings", label: "Settings", icon: "⚙️" }
-  ];
+  const menuItems = {
+    admin: [
+      { path: "/admin/dashboard", label: "Dashboard", icon: <FiGrid /> },
+      { path: "/admin/orders", label: "Orders", icon: <FiShoppingCart /> },
+      { path: "/admin/categories", label: "Categories", icon: <FiTag /> },
+      { path: "/admin/products", label: "Products", icon: <FiBox /> },
+      { path: "/admin/sellers", label: "Sellers", icon: <FiHome /> },
+      { path: "/admin/settings", label: "Settings", icon: <FiSettings /> }
+    ],
+
+    seller: [
+      { path: "/seller/dashboard", label: "Dashboard", icon: <FiGrid /> },
+      { path: "/seller/products", label: "My Products", icon: <FiBox /> },
+      { path: "/seller/orders", label: "Orders", icon: <FiShoppingCart /> }
+    ]
+  };
 
   return (
     <aside className={`sidebar-admin ${isCollapsed ? "collapsed" : ""}`}>
@@ -28,28 +49,31 @@ function Sidebar({ isCollapsed, onToggleCollapse }) {
 
         {/* HEADER */}
         <div className="sidebar-admin-header">
-          <div className="logo-icon-admin"></div>
+          <div className="logo-icon-admin">JH</div>
 
           {!isCollapsed && (
             <div className="brand-info-admin">
               <h5 className="brand-title-admin">JH</h5>
-              <small className="brand-subtitle-admin">Admin Panel</small>
+              <small className="brand-subtitle-admin">
+                {user?.role === "admin" ? "Admin Panel" : "Seller Panel"}
+              </small>
             </div>
           )}
 
-          <button
+          {/* TOGGLE */}
+          <div
             className="sidebar-admin-toggle-btn"
             onClick={onToggleCollapse}
           >
-            {isCollapsed ? "→" : "←"}
-          </button>
+            {isCollapsed ? <FiChevronRight /> : <FiChevronLeft />}
+          </div>
         </div>
 
         <hr className="sidebar-admin-divider" />
 
-        {/* MENU */}
+        {/* 🔥 MENU (FIXED PART) */}
         <ul className="menu-list-admin">
-          {menuItems.map((item, index) => (
+          {menuItems[user?.role]?.map((item, index) => (
             <li key={index}>
               <NavLink
                 to={item.path}
@@ -58,14 +82,19 @@ function Sidebar({ isCollapsed, onToggleCollapse }) {
                 }
                 title={isCollapsed ? item.label : ""}
               >
-                <span className="menu-icon-admin">{item.icon}</span>
+                {({ isActive }) => (
+                  <>
+                    <span className="menu-icon-admin">{item.icon}</span>
 
-                {!isCollapsed && (
-                  <span className="menu-label-admin">{item.label}</span>
-                )}
+                    {!isCollapsed && (
+                      <span className="menu-label-admin">{item.label}</span>
+                    )}
 
-                {!isCollapsed && (
-                  <span className="active-dot-admin"></span>
+                    {/* Active Dot */}
+                    {!isCollapsed && isActive && (
+                      <span className="active-dot-admin"></span>
+                    )}
+                  </>
                 )}
               </NavLink>
             </li>
@@ -75,14 +104,16 @@ function Sidebar({ isCollapsed, onToggleCollapse }) {
 
       {/* LOGOUT */}
       <div className="sidebar-footer-admin">
-        <button
+        <div
           className="logout-btn-admin"
           onClick={handleLogout}
           title={isCollapsed ? "Logout" : ""}
         >
-          <span className="logout-icon-admin">🚪</span>
+          <span className="logout-icon-admin">
+            <FiLogOut />
+          </span>
           {!isCollapsed && <span>Logout</span>}
-        </button>
+        </div>
       </div>
     </aside>
   );

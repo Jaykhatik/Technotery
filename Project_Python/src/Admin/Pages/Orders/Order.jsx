@@ -1,10 +1,20 @@
 import React from "react";
 import "./Order.css";
 
+
+import {
+  FiBell,
+  FiPlus,
+  FiEye,
+  FiEdit,
+  FiTrash2
+} from "react-icons/fi";
+
 const Orders = () => {
+
   return (
     <div className="orders-container">
-      <h2>📦 Orders Management</h2>
+      {/* <h2> Orders Management</h2> */}
 
       <div className="table-wrapper">
         <table className="orders-table">
@@ -32,8 +42,8 @@ const Orders = () => {
               <td>₹120000</td>
               <td><span className="status pending">Pending</span></td>
               <td>09 Apr 2026</td>
-              <td>
-                <button className="btn view">View</button>
+              <td className="actions-orders">
+                <FiEye className="action-orders view" />
               </td>
             </tr>
 

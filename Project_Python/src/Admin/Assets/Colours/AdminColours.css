@@ -1,0 +1,17 @@
+:root {
+  --primary: #c23b0a;        /* your orange */
+  --primary-light: #ff8c42;
+  --primary-soft: #fff3ec;
+
+  --bg-main: #f9fafb;        /* main background */
+  --bg-card: #ffffff;
+
+  --text-main: #111827;
+  --text-light: #6b7280;
+
+  --border: #e5e7eb;
+
+  --accent-blue: #3b82f6;    /* 🔥 secondary color */
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+}

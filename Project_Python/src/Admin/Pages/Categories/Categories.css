@@ -1,0 +1,183 @@
+/* ===== PAGE ===== */
+.categories-page {
+  padding: 20px;
+  background: var(--bg-main);
+  /* min-height: 100vh; */
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.topbar h2 {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ===== ACTIONS ===== */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* 🔔 NOTIFICATION */
+.notification {
+  position: relative;
+  font-size: 22px;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.notification:hover {
+  color: var(--primary);
+}
+
+.notification .badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--accent-red);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* ➕ ADD BUTTON */
+.add-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: white;
+  padding: 9px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.add-category svg {
+  font-size: 18px;
+}
+
+.add-category:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+/* ===== TABLE CONTAINER ===== */
+.table-container {
+  background: var(--bg-card);
+  border-radius: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+/* ===== TABLE ===== */
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.category-table th {
+  background: #f3f4f6; /* neutral */
+  color: var(--text-main);
+  padding: 14px;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ROWS */
+.category-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* HOVER EFFECT */
+.category-table tbody tr {
+  transition: 0.2s;
+}
+
+.category-table tbody tr:hover {
+  background: var(--primary-soft);
+}
+
+/* ===== STATUS BADGES ===== */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ACTIVE */
+.status.active {
+  background: rgba(16,185,129,0.1);
+  color: var(--accent-green);
+}
+
+/* INACTIVE */
+.status.inactive {
+  background: rgba(239,68,68,0.1);
+  color: var(--accent-red);
+}
+
+/* ===== ACTION ICONS ===== */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* COMMON */
+.action {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+/* VIEW */
+.action.view {
+  color: var(--accent-blue);
+}
+
+.action.view:hover {
+  background: rgba(59,130,246,0.12);
+  transform: scale(1.1);
+}
+
+/* EDIT */
+.action.edit {
+  color: var(--accent-green);
+}
+
+.action.edit:hover {
+  background: rgba(16,185,129,0.12);
+  transform: scale(1.1);
+}
+
+/* DELETE */
+.action.delete {
+  color: var(--accent-red);
+}
+
+.action.delete:hover {
+  background: rgba(239,68,68,0.12);
+  transform: scale(1.1);
+}

@@ -1,6 +1,6 @@
 /* ===== SIDEBAR CONTAINER ===== */
 .sidebar-admin {
-  width: 260px;
+  width: 280px;
   height: 100vh;
   background: linear-gradient(135deg, #c23b0a, #a83009);
   color: #fff;
@@ -162,4 +162,21 @@
 /* COLLAPSED LOGOUT */
 .sidebar-admin.collapsed .logout-btn-admin span {
   display: none;
+}
+/* FIX ICON SIZE */
+.menu-icon-admin svg {
+  font-size: 18px;
+}
+
+/* TOGGLE ICON FIX */
+.sidebar-admin-toggle-btn {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+/* LOGOUT ICON */
+.logout-icon-admin svg {
+  font-size: 18px;
 }
