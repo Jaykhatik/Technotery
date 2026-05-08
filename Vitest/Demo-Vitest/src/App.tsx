@@ -1,22 +1,18 @@
-import { ThemeProvider } from "./context/ThemeProvider";
-import { CounterComponent } from "./redux/Features/counter/Counter";
-import Photos from "./Components/Photos";
-import { ThemeComponent } from "./Components/ThemeCompo";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 export default function App() {
   return (
-     <main className="app">
-      <header className="app__hero">
-        <p className="app__eyebrow">Vitest & React demo</p>
-        <h1>Modern Dashboard</h1>
-      </header>
-      <section className="app__grid">
-        <Photos />
-        <ThemeProvider>
-          <ThemeComponent />
-        </ThemeProvider>
-        <CounterComponent />
-      </section>
-    </main>
+    <Router>
+      <Toaster position="top-right" reverseOrder={false} />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Home />} />
+        {/* Redirect any other path to login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }

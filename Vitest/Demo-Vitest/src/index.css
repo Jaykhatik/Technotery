@@ -3,9 +3,17 @@
 :root {
   color-scheme: light;
   font-family: "Inter", sans-serif;
-  background: 
-    radial-gradient(circle at top left, rgba(99, 102, 241, 0.05), transparent 40%),
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.05), transparent 40%),
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(99, 102, 241, 0.05),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(168, 85, 247, 0.05),
+      transparent 40%
+    ),
     #f8fafc;
   color: #1e293b;
   line-height: 1.5;
@@ -62,8 +70,6 @@ body {
   line-height: 1.1;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
 
@@ -82,7 +88,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 2rem;
   padding: 2.5rem;
-  box-shadow: 
+  box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.04),
     0 4px 6px -2px rgba(0, 0, 0, 0.02),
     inset 0 0 0 1px rgba(255, 255, 255, 0.5);
@@ -92,7 +98,7 @@ body {
 .card:hover {
   transform: translateY(-8px);
   background: rgba(255, 255, 255, 0.85);
-  box-shadow: 
+  box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.06),
     0 10px 10px -5px rgba(0, 0, 0, 0.02);
 }
@@ -239,8 +245,14 @@ button:active {
 
 /* Animations */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -250,4 +262,18 @@ button:active {
   .app__grid {
     grid-template-columns: 1fr;
   }
+}
+.logout-btn {
+  padding: 15px;
+  background: #ff4b4b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.nav-class{
+   margin-bottom: 10px;
+   display: flex;
+   justify-content: flex-end;
 }
