@@ -18,9 +18,8 @@ describe("App component", () => {
     vi.clearAllMocks();
   });
 
-  it("should render App component", () => {
+  it("should render App component with Login page by default", () => {
     renderWithRedux(<App />);
-    expect(screen.getByText(/Vitest & React demo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Modern Dashboard/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /login/i })).toBeInTheDocument();
   });
 });

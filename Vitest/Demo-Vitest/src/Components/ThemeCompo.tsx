@@ -1,4 +1,5 @@
 import { useTheme } from "../context/ThemeContext";
+import "../styles/components/Theme.css";
 
 
 export function ThemeComponent() {

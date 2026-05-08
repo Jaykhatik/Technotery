@@ -4,6 +4,7 @@ import { ThemeProvider } from "../context/ThemeProvider";
 import { CounterComponent } from "../redux/Features/counter/Counter";
 import Photos from "../Components/Photos";
 import { ThemeComponent } from "../Components/ThemeCompo";
+import "../styles/pages/Home.css";
 
 export default function Home() {
   const navigate = useNavigate();

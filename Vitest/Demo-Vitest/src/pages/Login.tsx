@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import "./Login.css";
+import "../styles/pages/Login.css";
 
 type LoginResponse = {
   token: string;
@@ -46,7 +46,6 @@ export default function Login() {
         }
       );
 
-      console.log(res.data);
       localStorage.setItem("token", res.data.token);
 
       toast.success(`Welcome back, ${res.data.firstName}!`);
