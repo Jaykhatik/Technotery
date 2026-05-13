@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { useNavigate } from "react-router-dom";
-import { saveFile, getFiles, deleteFile } from "../Utils/indexedDB";
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [files, setFiles] = useState([]);
 
   const handleLogout = async () => {
     try {
@@ -20,17 +18,6 @@ function Dashboard() {
       alert("Logout failed ");
     }
   };
-  //load files from indexedDB
-
-  useEffect(() => {
-    const loadFiles = async () => {
-      const storedFiles = await getFiles();
-
-      setFiles(storedFiles);
-    };
-
-    loadFiles();
-  }, []);
 
   return (
     <div className="app">
@@ -62,52 +49,6 @@ function Dashboard() {
             <h3>Revenue</h3>
             <p>₹25,000</p>
           </div>
-        </div>
-
-        {/* Uploaded Files */}
-        <div>
-          <h2>Uploaded Files</h2>
-
-          {files.length === 0 ? (
-            <p>No files uploaded</p>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                gap: "20px",
-                marginTop: "20px",
-              }}
-            >
-              {files.map((item) => (
-                <div
-                  key={item.id}
-                  style={{
-                    border: "1px solid #ccc",
-                    padding: "15px",
-                    borderRadius: "10px",
-                  }}
-                >
-                  {/* Image Preview */}
-                  {item.type.startsWith("image/") && (
-                    <img
-                      src={URL.createObjectURL(item.file)}
-                      alt={item.name}
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                        borderRadius: "10px",
-                      }}
-                    />
-                  )}
-
-                  <h3>{item.name}</h3>
-
-                  <p>{(item.size / 1024).toFixed(2)} KB</p>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>
