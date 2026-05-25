@@ -40,5 +40,12 @@
     "email": "dsav@gmail.com",
     "age": 24,
     "city": "suart"
+  },
+  {
+    "userId": 7,
+    "userName": "Parthbdjbe",
+    "email": "fff@gmail.com",
+    "age": 20,
+    "city": "suart"
   }
 ]
