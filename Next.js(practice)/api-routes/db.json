@@ -1,0 +1,23 @@
+[
+  {
+    "userId": 1,
+    "userName": "Ravi",
+    "age": 26,
+    "city": "Rajkot",
+    "email": "ravi@gmail.com"
+  },
+  {
+    "userId": 2,
+    "userName": "Jay",
+    "age": 21,
+    "city": "Ahmedabad",
+    "email": "jay@gmail.com"
+  },
+  {
+    "userId": 3,
+    "userName": "Rahul",
+    "age": 20,
+    "city": "Suart",
+    "email": "rahul@gmail.com"
+  }
+]

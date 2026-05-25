@@ -1,0 +1,161 @@
+// ─── Portfolio Data ───────────────────────────────────────────────────────────
+// Edit this file to update your portfolio content dynamically
+
+export const portfolioData = {
+  name: "JK",
+  fullName: "J. Kumar",
+  initials: "JK",
+  title: "Full Stack Developer",
+  subtitle: "React · TypeScript · Node.js",
+  tagline: "Building modern web experiences",
+  email: "jk@example.com",
+  social: {
+    linkedin: "https://linkedin.com",
+    twitter: "https://twitter.com",
+    instagram: "https://instagram.com",
+    github: "https://github.com",
+  },
+  about: {
+    description:
+      "I'm a passionate Full Stack Developer with expertise in building scalable web applications. I love turning complex problems into simple, beautiful, and intuitive designs.",
+    skills: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Next.js",
+      "MongoDB",
+      "PostgreSQL",
+      "GraphQL",
+      "Docker",
+    ],
+    experience: "3+ Years Experience",
+    projects: "20+ Projects Completed",
+    clients: "15+ Happy Clients",
+  },
+  projects: [
+    {
+      id: 1,
+      title: "E-Commerce Platform",
+      description:
+        "A full-featured e-commerce platform with real-time inventory, payment integration, and admin dashboard.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: true,
+    },
+    {
+      id: 2,
+      title: "Task Management App",
+      description:
+        "Collaborative task management tool with real-time updates, drag-and-drop, and team workspaces.",
+      tech: ["React", "TypeScript", "Socket.io", "PostgreSQL"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: true,
+    },
+    {
+      id: 3,
+      title: "AI Chat Interface",
+      description:
+        "Modern chat interface powered by AI with context memory, file uploads, and code highlighting.",
+      tech: ["Next.js", "OpenAI API", "Tailwind", "Prisma"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: true,
+    },
+    {
+      id: 4,
+      title: "Analytics Dashboard",
+      description:
+        "Real-time analytics dashboard with interactive charts, custom reports, and data export.",
+      tech: ["React", "D3.js", "Node.js", "Redis"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: false,
+    },
+    {
+      id: 5,
+      title: "Social Media App",
+      description:
+        "Feature-rich social platform with stories, reels, live streaming, and end-to-end encryption.",
+      tech: ["React Native", "GraphQL", "AWS", "WebRTC"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: false,
+    },
+    {
+      id: 6,
+      title: "Portfolio Builder",
+      description:
+        "Drag-and-drop portfolio builder with custom themes, SEO optimization, and one-click deploy.",
+      tech: ["Next.js", "TypeScript", "Vercel", "Sanity"],
+      image: "",
+      link: "#",
+      github: "#",
+      featured: false,
+    },
+  ],
+  services: [
+    {
+      icon: "💻",
+      title: "Web Development",
+      description: "Building fast, responsive, and scalable web applications using modern technologies like React, Next.js and TypeScript.",
+      color: "#0080ff",
+      tags: ["React", "Next.js", "TypeScript"],
+    },
+    {
+      icon: "📱",
+      title: "Mobile Development",
+      description: "Cross-platform mobile apps with React Native delivering native performance for both iOS and Android.",
+      color: "#a855f7",
+      tags: ["React Native", "Expo", "iOS/Android"],
+    },
+    {
+      icon: "🎨",
+      title: "UI/UX Design",
+      description: "Crafting beautiful and intuitive user interfaces with a focus on user experience, accessibility and delight.",
+      color: "#ec4899",
+      tags: ["Figma", "Framer", "Design Systems"],
+    },
+    {
+      icon: "⚡",
+      title: "Performance Optimization",
+      description: "Optimizing web apps for speed, SEO, and Core Web Vitals to deliver lightning-fast user experiences.",
+      color: "#f59e0b",
+      tags: ["Lighthouse", "Web Vitals", "SEO"],
+    },
+    {
+      icon: "🛠️",
+      title: "Backend & APIs",
+      description: "Designing and building robust REST and GraphQL APIs with Node.js, Express and scalable database architecture.",
+      color: "#10b981",
+      tags: ["Node.js", "GraphQL", "MongoDB"],
+    },
+    {
+      icon: "☁️",
+      title: "Cloud & DevOps",
+      description: "Deploying and managing cloud infrastructure with CI/CD pipelines, Docker containers and AWS services.",
+      color: "#06b6d4",
+      tags: ["AWS", "Docker", "CI/CD"],
+    },
+    {
+      icon: "🔒",
+      title: "Security & Auth",
+      description: "Implementing secure authentication, authorization and data protection following industry best practices.",
+      color: "#ef4444",
+      tags: ["OAuth", "JWT", "Encryption"],
+    },
+    {
+      icon: "🤖",
+      title: "AI Integration",
+      description: "Integrating AI and machine learning capabilities into web apps using OpenAI, LangChain and vector databases.",
+      color: "#8b5cf6",
+      tags: ["OpenAI", "LangChain", "Vectors"],
+    },
+  ],
+};
