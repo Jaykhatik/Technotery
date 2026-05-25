@@ -19,5 +19,12 @@
     "age": 20,
     "city": "Suart",
     "email": "rahul@gmail.com"
+  },
+  {
+    "userId": 4,
+    "userName": "Prashant",
+    "email": "prashant@gmail.com",
+    "age": 22,
+    "city": "Surat"
   }
 ]

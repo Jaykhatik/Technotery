@@ -1,22 +1,8 @@
-import { User } from "@/types";
+import { getUserDetail } from "@/services/user";
 import Link from "next/link";
 
 interface PageProps {
   params: Promise<{ userId: string }>;
-}
-
-async function getUserDetail(userId: string): Promise<User[] | null> {
-  try {
-    const res = await fetch(`http://localhost:3000/api/users/${userId}`);
-    if (!res.ok) {
-      return null;
-    }
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching user detail:", error);
-    return null;
-  }
 }
 
 export default async function UserDetailPage({ params }: PageProps) {

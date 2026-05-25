@@ -1,14 +1,8 @@
-import { User, ApiResponse } from "@/types";
+import { getUsersList } from "@/services/user";
 import Link from "next/link";
 
-async function getUser(): Promise<ApiResponse> {
-  const res = await fetch("http://localhost:3000/api/users");
-  const data = await res.json();
-  return data;
-}
-
 export default async function UserPage() {
-  const responseData = await getUser();
+  const responseData = await getUsersList();
   const users = responseData.data;
 
   console.log(users);
