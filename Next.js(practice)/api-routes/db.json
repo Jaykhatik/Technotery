@@ -26,5 +26,19 @@
     "email": "prashant@gmail.com",
     "age": 22,
     "city": "Surat"
+  },
+  {
+    "userId": 5,
+    "userName": "Harsh",
+    "email": "harsh@gmail.com",
+    "age": 40,
+    "city": "Junagadh"
+  },
+  {
+    "userId": 6,
+    "userName": "sdav",
+    "email": "dsav@gmail.com",
+    "age": 24,
+    "city": "suart"
   }
 ]

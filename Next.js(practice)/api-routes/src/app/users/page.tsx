@@ -1,8 +1,8 @@
-import { getUsersList } from "@/services/user";
+import { getAllUsers } from "@/services/userService";
 import Link from "next/link";
 
 export default async function UserPage() {
-  const responseData = await getUsersList();
+  const responseData = await getAllUsers();
   const users = responseData.data;
 
   console.log(users);

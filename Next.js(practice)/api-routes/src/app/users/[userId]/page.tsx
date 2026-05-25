@@ -1,4 +1,4 @@
-import { getUserDetail } from "@/services/user";
+import { getUserById } from "@/services/userService";
 import Link from "next/link";
 
 interface PageProps {
@@ -7,7 +7,7 @@ interface PageProps {
 
 export default async function UserDetailPage({ params }: PageProps) {
   const { userId } = await params;
-  const users = await getUserDetail(userId);
+  const users = await getUserById(userId);
 
   if (!users || users.length === 0) {
     return (

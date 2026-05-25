@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import { createUser, getUsersList } from "@/services/user";
+import { createUser, getAllUsers } from "@/services/userService";
 import { toast } from "react-hot-toast";
 
 export default function AddUserPage() {
@@ -15,7 +15,7 @@ export default function AddUserPage() {
   useEffect(() => {
     const fetchNextId = async () => {
       try {
-        const responseData = await getUsersList();
+        const responseData = await getAllUsers();
         const users = responseData.data;
         if (users && users.length > 0) {
           const ids = users.map((u) => Number(u.userId)).filter((id) => !isNaN(id));
