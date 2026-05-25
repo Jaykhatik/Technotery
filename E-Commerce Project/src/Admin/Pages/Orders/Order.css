@@ -1,0 +1,106 @@
+/* ===== CONTAINER ===== */
+.orders-container {
+  padding: 25px;
+  background: var(--bg-main);
+  /* min-height: 100vh; */
+}
+
+.orders-container h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ===== TABLE WRAPPER ===== */
+.table-wrapper {
+  overflow-x: auto;
+  background: var(--bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+/* ===== TABLE ===== */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.orders-table th {
+  background: #f3f4f6; /* neutral (not dark) */
+  color: var(--text-main);
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+
+/* DATA */
+.orders-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+/* ROW HOVER */
+.orders-table tbody tr {
+  transition: 0.2s;
+}
+
+.orders-table tbody tr:hover {
+  background: var(--primary-soft);
+}
+
+/* ===== STATUS BADGES ===== */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* PENDING */
+.status.pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+/* COMPLETED */
+.status.completed {
+  background: rgba(16,185,129,0.12);
+  color: var(--accent-green);
+}
+
+/* CANCELLED */
+.status.cancelled {
+  background: rgba(239,68,68,0.12);
+  color: var(--accent-red);
+}
+
+/* ===== ACTION ICONS ===== */
+.actions-orders {
+  display: flex;  
+  /* background-color: red; */
+  margin-left: 20px;
+}
+
+/* COMMON */
+.action-orders {
+  font-size: 30px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+/* VIEW */
+.action-orders.view {
+  color: var(--accent-blue);
+}
+
+.action-orders.view:hover {
+  background: rgba(59,130,246,0.12);
+  transform: scale(1.1);
+}
+

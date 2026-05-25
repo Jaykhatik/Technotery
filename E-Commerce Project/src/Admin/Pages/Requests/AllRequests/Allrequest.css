@@ -1,0 +1,120 @@
+/* CONTAINER */
+.allRequests-container {
+  padding: 25px;
+  background: #f6f7fb;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.allRequests-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.allRequests-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* FILTER BUTTONS */
+.allRequests-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.allRequests-btn {
+  padding: 8px 14px;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.allRequests-btn:hover {
+  background: #eaeaea;
+}
+
+/* TABLE WRAPPER */
+.allRequests-tableWrapper {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+/* TABLE */
+.allRequests-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.allRequests-thead {
+  background: #f1f3f6;
+}
+
+.allRequests-table th,
+.allRequests-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* ROW HOVER */
+.allRequests-row:hover {
+  background: #fafafa;
+}
+
+/* STATUS */
+.allRequests-status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.allRequests-status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.allRequests-status-approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.allRequests-status-rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ACTION BUTTONS */
+.allRequests-actionBtn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.allRequests-actionBtn.approve {
+  background: #28a745;
+  color: white;
+}
+
+.allRequests-actionBtn.reject {
+  background: #dc3545;
+  color: white;
+}
+
+.allRequests-actionBtn:hover {
+  opacity: 0.85;
+}

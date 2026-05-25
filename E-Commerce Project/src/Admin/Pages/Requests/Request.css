@@ -1,0 +1,146 @@
+.requests-page {
+  padding: 20px;
+  background: #f4f6f9;
+  text-align: left;
+  /* min-height: 100vh; */
+}
+
+.requests-page h2 {
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* TABLE */
+.table-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow-x: auto;
+}
+
+.request-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.request-table thead {
+  background: #f1f3f6;
+}
+
+.request-table th {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+}
+
+.request-table td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+}
+
+.request-table tr:hover {
+  background: #f9fafb;
+}
+
+/* STATUS */
+.status {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+}
+
+.approve {
+  color: green;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.approve:hover {
+  transform: scale(1.2);
+}
+
+.reject {
+  color: red;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.reject:hover {
+  transform: scale(1.2);
+}
+.breadcrumb {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+/* "Categories" */
+.breadcrumb span:first-child {
+  color: #c23b0a;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+/* slash "/" */
+.breadcrumb span:nth-child(2) {
+  color: #c23b0a; 
+}
+
+/* "Requests" active page */
+.breadcrumb span:last-child {
+  color: #888; 
+}
+.breadcrumb .link {
+  color: #888;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.breadcrumb .link:hover {
+  text-decoration: underline;
+}
+.status {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* PENDING */
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* APPROVED */
+.status.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* REJECTED */
+.status.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
