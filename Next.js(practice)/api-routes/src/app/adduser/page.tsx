@@ -57,9 +57,10 @@ export default function AddUserPage() {
       // Redirect back to users directory on success
       router.push("/users");
       router.refresh();
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
-      const errMsg = err.message || "Failed to create user. Make sure API is running.";
+      const error = err as { message?: string };
+      const errMsg = error.message || "Failed to create user. Make sure API is running.";
       toast.error(errMsg);
       setError(errMsg);
     } finally {

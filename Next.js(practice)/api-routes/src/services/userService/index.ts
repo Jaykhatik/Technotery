@@ -50,7 +50,8 @@ export const createUser = async (data: {
             data
         );
         return res.data;
-    } catch (err: any) {
-        throw err.response?.data || err.message;
+    } catch (err) {
+        const error = err as { response?: { data?: unknown }; message?: string };
+        throw error.response?.data || error.message || "An error occurred";
     }
 };
