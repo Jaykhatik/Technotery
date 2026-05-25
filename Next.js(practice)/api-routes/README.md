@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👥 Next.js Users Directory — Project Overview
 
-## Getting Started
+A fast, premium, full-stack **Next.js App Router** user directory profile application. It performs full CRUD operations on a mock JSON database file (`db.json`) using robust API routes, centralized services, and dynamic client-side components.
 
-First, run the development server:
+---
 
+## ⚡ Key Highlights
+* **Create (POST)**: Dynamic form with automated next sequential user ID calculations.
+* **Read (GET)**: Server-Side Rendered (SSR) fast listings grid and dynamic profile detailed pages.
+* **Update (PUT)**: Sleek, inline toggle form to edit profiles directly inside the card with instant client state rendering.
+* **Delete (DELETE)**: Inline card removal with custom red micro-animated double-confirmation buttons.
+* **Typings**: 100% Type-safe codebase with all interfaces centralized inside the types folder.
+* **Aesthetics**: Premium dark neon interface using Outfit typography, subtle glassmorphism, responsive grids, and instant notifications with `react-hot-toast`.
+
+---
+
+## 🗺️ Project Documentation Guide
+To make this repository extremely easy to understand, we have split the technical guides into simple, targeted overview files. Click any link below to learn more:
+
+| Guide File | Focus Area | Description |
+| :--- | :--- | :--- |
+| 📖 **[CRUD.md](./CRUD.md)** | **Full CRUD Walkthrough** | Complete code manual explaining exactly how Create, Read, Update, and Delete were built from start to end. |
+| 📁 **[app.md](./src/app/app.md)** | **Routing & Endpoints** | Breakdown of Next.js dynamic routing pages (`/users/[userId]`) and backend API routes. |
+| 📁 **[services.md](./src/services/services.md)** | **API Client Layer** | Explains the Axios central instance, base routing constants, request interceptors, and services. |
+| 📁 **[components.md](./src/components/components.md)** | **UI Components** | Overview of dynamic interactive client cards (`UserCard`, `UserDetailCard`). |
+| 📁 **[utils.md](./src/utils/utils.md)** | **Mock Database** | Explains how we read/write persistence securely to `db.json` using Node's FileSystem module. |
+| 📁 **[types.md](./src/types/types.md)** | **TypeScript Types** | Explains all centralized type interfaces stored in the shared directory. |
+
+---
+
+## 🏃‍♂️ Quick Start
+
+### 1. Install dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. Start the local server:
+```bash
+npm run dev
+```
+Open **[http://localhost:3000/users](http://localhost:3000/users)** to start managing profiles!

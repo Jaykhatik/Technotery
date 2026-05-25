@@ -55,3 +55,40 @@ export const createUser = async (data: {
         throw error.response?.data || error.message || "An error occurred";
     }
 };
+
+// UPDATE USER
+export const updateUser = async (
+    userId: string | number,
+    data: {
+        userName: string;
+        age: number;
+        city: string;
+        email: string;
+    }
+) => {
+    try {
+        const res = await USER_API.put(
+            `${USER_API_ROUTES.users}/${userId}`,
+            data
+        );
+        return res.data;
+    } catch (err) {
+        const error = err as { response?: { data?: unknown }; message?: string };
+        throw error.response?.data || error.message || "An error occurred";
+    }
+};
+
+// DELETE USER
+export const deleteUser = async (userId: string | number) => {
+    try {
+        const res = await USER_API.delete(
+            `${USER_API_ROUTES.users}/${userId}`
+        );
+        return res.data;
+    } catch (err) {
+        const error = err as { response?: { data?: unknown }; message?: string };
+        throw error.response?.data || error.message || "An error occurred";
+    }
+};
+
+

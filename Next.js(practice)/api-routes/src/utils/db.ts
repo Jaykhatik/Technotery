@@ -26,3 +26,12 @@ export function saveUser(newUser: User): void {
     console.error("Error writing to db.json:", error);
   }
 }
+
+export function saveUsers(allUsers: User[]): void {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(allUsers, null, 2), "utf-8");
+  } catch (error) {
+    console.error("Error writing to db.json:", error);
+  }
+}
+
