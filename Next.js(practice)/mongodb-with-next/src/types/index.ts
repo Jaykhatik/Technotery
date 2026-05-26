@@ -9,5 +9,12 @@ export interface Product {
 
 export interface ApiResponse {
   success: boolean;
-  result: Product[] | string;
+  result: Product[] | Product | string;
 }
+
+export interface Toast {
+  id: string;
+  message: string;
+  type: "success" | "error";
+}
+

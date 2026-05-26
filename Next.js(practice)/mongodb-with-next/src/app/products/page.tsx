@@ -1,4 +1,5 @@
 import { getAllProducts } from "@/services/productService";
+import ProductManager from "./ProductManager";
 import styles from "./products.module.css";
 
 export default async function ProductsPage() {
@@ -27,40 +28,7 @@ export default async function ProductsPage() {
           <p>We encountered an error connecting to the product catalog API. Please verify your server is running and try again.</p>
         </section>
       ) : (
-        <section className={styles.grid} id="products-list">
-          {products.length === 0 ? (
-            <article className={styles.noProducts}>
-              <p>No products found in the catalog. Try adding some documents to your collection using the MongoDB Playground!</p>
-            </article>
-          ) : (
-            products.map((product: any) => (
-              <article key={product._id} className={styles.card} id={`product-${product._id}`}>
-                <div>
-                  <div className={styles.category}>{product.category || "General"}</div>
-                  <h2 className={styles.productName}>{product.name}</h2>
-                  <div className={styles.specs}>
-                    <span className={`${styles.badge} ${styles.badgeCompany}`}>
-                      {product.company}
-                    </span>
-                    <span className={styles.badge}>
-                      Color: {product.color}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={styles.footer}>
-                  <div className={styles.priceContainer}>
-                    <span className={styles.priceLabel}>Price</span>
-                    <span className={styles.price}>
-                      ₹{Number(product.price).toLocaleString("en-IN")}
-                    </span>
-                  </div>
-                  <button className={styles.actionButton}>Buy Now</button>
-                </div>
-              </article>
-            ))
-          )}
-        </section>
+        <ProductManager initialProducts={products} />
       )}
     </main>
   );
