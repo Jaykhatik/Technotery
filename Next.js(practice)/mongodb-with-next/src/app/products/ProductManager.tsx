@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { Product, Toast } from "@/types";
 import { createProduct, updateProduct, deleteProduct } from "@/services/productService";
 import ProductCard from "@/components/products/ProductCard";
+import ProductFilters from "@/components/products/ProductFilters";
 import ProductForm, { ProductFormData } from "@/components/products/ProductForm";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import Pagination from "@/components/ui/Pagination";
 import ToastContainer from "@/components/ui/ToastContainer";
 import styles from "./products.module.css";
 
@@ -13,6 +15,62 @@ const EMPTY_FORM: ProductFormData = { name: "", price: "", company: "", color: "
 
 export default function ProductManager({ initialProducts }: { initialProducts: Product[] }) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Extract unique categories dynamically from database products
+  const categories = React.useMemo(() => {
+    const unique = new Set<string>();
+    products.forEach((p) => {
+      if (p.category) {
+        const cleaned = p.category.trim();
+        if (cleaned) {
+          const existing = Array.from(unique).find(
+            (c) => c.toLowerCase() === cleaned.toLowerCase()
+          );
+          if (!existing) {
+            unique.add(cleaned);
+          }
+        }
+      }
+    });
+    return ["All", ...Array.from(unique)];
+  }, [products]);
+
+  // Filter products based on search query and category
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) => {
+      const cat = product.category || "General";
+      const matchesCategory =
+        selectedCategory === "All" ||
+        cat.toLowerCase() === selectedCategory.toLowerCase();
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.company || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.color || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        cat.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [products, selectedCategory, searchQuery]);
+
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 6;
+
+  // Reset page to 1 whenever filters change to avoid out of bounds pages
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchQuery]);
+
+  // Total pages
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  // Paginated products subset
+  const paginatedProducts = React.useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredProducts.slice(start, start + itemsPerPage);
+  }, [filteredProducts, currentPage, itemsPerPage]);
 
   // Form modal state
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -113,15 +171,15 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
   return (
     <div style={{ width: "100%", maxWidth: "1200px" }}>
 
-      {/* Add Product Button */}
-      <div className={styles.toolbar}>
-        <button className={styles.addButton} onClick={openCreate}>
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
-          </svg>
-          Add Product
-        </button>
-      </div>
+      {/* Premium Filter and Control Bar Component */}
+      <ProductFilters
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedCategory={selectedCategory}
+        onCategorySelect={setSelectedCategory}
+        categories={categories}
+        onAddProductClick={openCreate}
+      />
 
       {/* Product Grid */}
       <section className={styles.grid} id="products-list">
@@ -129,8 +187,12 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
           <article className={styles.noProducts}>
             <p>No products yet. Click <strong>Add Product</strong> to get started.</p>
           </article>
+        ) : paginatedProducts.length === 0 ? (
+          <article className={styles.noProducts}>
+            <p>No products match your search or selected category filter.</p>
+          </article>
         ) : (
-          products.map((product) => (
+          paginatedProducts.map((product) => (
             <ProductCard
               key={product._id}
               product={product}
@@ -141,6 +203,15 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
           ))
         )}
       </section>
+
+      {/* Pagination Section */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        totalItems={filteredProducts.length}
+        itemsPerPage={itemsPerPage}
+      />
 
       {/* Create / Edit Form */}
       {isFormOpen && (
