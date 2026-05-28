@@ -13,17 +13,21 @@ import styles from "./products.module.css";
 
 const EMPTY_FORM: ProductFormData = { name: "", price: "", company: "", color: "", category: "" };
 
-export default function ProductManager({ initialProducts }: { initialProducts: Product[] }) {
+export default function ProductManager({ initialProducts, initialCategories }: { initialProducts: Product[]; initialCategories: string[] }) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Extract unique categories dynamically from database products
+  // Use categories loaded from the persisted category collection first, then fall back to any product categories.
   const categories = React.useMemo(() => {
+    const rawCategories = initialCategories && initialCategories.length > 0
+      ? initialCategories
+      : products.map((p) => p.category || "");
+
     const unique = new Set<string>();
-    products.forEach((p) => {
-      if (p.category) {
-        const cleaned = p.category.trim();
+    rawCategories.forEach((category) => {
+      if (category) {
+        const cleaned = category.trim();
         if (cleaned) {
           const existing = Array.from(unique).find(
             (c) => c.toLowerCase() === cleaned.toLowerCase()
@@ -34,8 +38,9 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
         }
       }
     });
+
     return ["All", ...Array.from(unique)];
-  }, [products]);
+  }, [initialCategories, products]);
 
   // Filter products based on search query and category
   const filteredProducts = React.useMemo(() => {
@@ -58,10 +63,15 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 6;
 
-  // Reset page to 1 whenever filters change to avoid out of bounds pages
-  React.useEffect(() => {
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
     setCurrentPage(1);
-  }, [selectedCategory, searchQuery]);
+  };
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
 
   // Total pages
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -174,9 +184,9 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
       {/* Premium Filter and Control Bar Component */}
       <ProductFilters
         searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
+        onSearchChange={handleSearchChange}
         selectedCategory={selectedCategory}
-        onCategorySelect={setSelectedCategory}
+        onCategorySelect={handleCategorySelect}
         categories={categories}
         onAddProductClick={openCreate}
       />
@@ -218,6 +228,7 @@ export default function ProductManager({ initialProducts }: { initialProducts: P
         <ProductForm
           mode={formMode}
           formData={formData}
+          categoryOptions={categories.slice(1)}
           isSaving={isSaving}
           onChange={(e) => setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
           onSubmit={handleSave}

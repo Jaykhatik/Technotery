@@ -7,7 +7,6 @@ type RouteParams = {
   params: Promise<{ productId: string }>;
 };
 
-// 1. GET - Fetch a single product's details
 export async function GET(request: Request, { params }: RouteParams) {
   try {
     const { productId } = await params;
@@ -38,7 +37,6 @@ export async function GET(request: Request, { params }: RouteParams) {
   }
 }
 
-// 2. PUT - Update a product
 export async function PUT(request: Request, { params }: RouteParams) {
   try {
     const { productId } = await params;
@@ -53,7 +51,6 @@ export async function PUT(request: Request, { params }: RouteParams) {
 
     const body = await request.json();
     
-    // Find the product first to ensure it exists
     const existingProduct = await Product.findById(productId);
     if (!existingProduct) {
       return NextResponse.json(
@@ -62,7 +59,6 @@ export async function PUT(request: Request, { params }: RouteParams) {
       );
     }
 
-    // Update fields if provided in the body
     if (body.name !== undefined) existingProduct.name = body.name;
     if (body.price !== undefined) existingProduct.price = body.price;
     if (body.company !== undefined) existingProduct.company = body.company;
@@ -80,7 +76,6 @@ export async function PUT(request: Request, { params }: RouteParams) {
   }
 }
 
-// 3. DELETE - Delete a product
 export async function DELETE(request: Request, { params }: RouteParams) {
   try {
     const { productId } = await params;

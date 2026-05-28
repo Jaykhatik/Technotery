@@ -7,9 +7,15 @@ export interface Product {
   category: string;
 }
 
-export interface ApiResponse {
+export interface Category {
+  _id?: string;
+  name: string;
+  description?: string;
+}
+
+export interface ApiResponse<T = Product | Product[] | Category | Category[] | string | string[]> {
   success: boolean;
-  result: Product[] | Product | string;
+  result: T;
 }
 
 export interface Toast {

@@ -15,17 +15,17 @@ export interface ProductFormData {
 interface ProductFormProps {
   mode: "create" | "edit";
   formData: ProductFormData;
+  categoryOptions: string[];
   isSaving: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
   onClose: () => void;
 }
 
-const CATEGORIES = ["Electronics", "Audio", "Wearables", "Accessories", "Other"];
-
 export default function ProductForm({
   mode,
   formData,
+  categoryOptions,
   isSaving,
   onChange,
   onSubmit,
@@ -75,9 +75,14 @@ export default function ProductForm({
               onChange={onChange}
             >
               <option value="">— Select —</option>
-              {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
+              {categoryOptions.length > 0 ? (
+                categoryOptions.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))
+              ) : (
+                <option value="">No categories available</option>
+              )}
+              <option value="Other">Other</option>
             </select>
           </div>
         </div>

@@ -1,3 +1,4 @@
+
 import { connectionSrt } from "@/lib/db";
 import { Product } from "@/lib/model/product";
 import mongoose from "mongoose";
@@ -18,7 +19,7 @@ export async function POST(request: Request) {
   try {
     await mongoose.connect(connectionSrt);
     const body = await request.json();
-    
+
     // Basic validation
     if (!body.name || !body.price) {
       return NextResponse.json(

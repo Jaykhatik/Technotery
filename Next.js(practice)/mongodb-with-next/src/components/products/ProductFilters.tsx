@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import styles from "./product.module.css";
 
 interface ProductFiltersProps {
@@ -50,12 +51,21 @@ export default function ProductFilters({
         </div>
 
         {/* Add Product Button */}
-        <button className={styles.addButton} onClick={onAddProductClick}>
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
-          </svg>
-          Add Product
-        </button>
+        <div className={styles.actionsGroup}>
+          <Link href="/categories" className={styles.secondaryButton}>
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            Categories
+          </Link>
+
+          <button className={styles.addButton} onClick={onAddProductClick}>
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" />
+            </svg>
+            Add Product
+          </button>
+        </div>
       </div>
 
       {/* Dynamic Category Filter Pills */}
