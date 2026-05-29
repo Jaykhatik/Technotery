@@ -21,6 +21,14 @@ export default function RootLayout({
                 <span className="brand-mark">P</span>
                 <span>Prisma Posts</span>
               </Link>
+              <div className="nav-actions">
+                <Link href="/posts" className="button">
+                  Posts
+                </Link>
+                <Link href="/tags" className="button">
+                  Tags
+                </Link>
+              </div>
             </div>
           </header>
           {children}

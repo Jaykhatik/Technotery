@@ -1,17 +1,25 @@
 import Link from "next/link";
-import type { Comment, Post, User } from "../../../generated/prisma";
+import type { Comment, Post, User, Tag } from "@prisma/client";
 import prisma from "../../../lib/prisma";
 import CommentForm from "./CommentForm";
 
 type PostDetail = Post & {
   author: User | null;
   comments: Array<Comment & { author?: User | null }>;
+  tags: Tag[];
 };
 
 async function getPost(id: string): Promise<PostDetail | null> {
+  const parsedId = parseInt(id, 10);
+  if (isNaN(parsedId)) return null;
+
   return prisma.post.findUnique({
-    where: { id },
-    include: { author: true, comments: { include: { author: true }, orderBy: { createdAt: "desc" } } },
+    where: { id: parsedId },
+    include: {
+      author: true,
+      comments: { include: { author: true }, orderBy: { createdAt: "desc" } },
+      tags: true,
+    },
   });
 }
 
@@ -60,6 +68,25 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           <header className="article-header">
             <p className="eyebrow">Post</p>
             <h1>{post.title}</h1>
+            {post.tags && post.tags.length > 0 ? (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.25rem" }}>
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag.id}
+                    style={{
+                      background: "var(--accent-soft, #d9f5ef)",
+                      color: "var(--accent-strong, #0b5f59)",
+                      fontWeight: "800",
+                      padding: "0.2rem 0.65rem",
+                      borderRadius: "999px",
+                      fontSize: "0.78rem",
+                    }}
+                  >
+                    #{tag.name}
+                  </span>
+                ))}
+              </div>
+            ) : null}
             <div className="article-byline">
               <span className="author-row">
                 <span className="avatar large">{getInitial(post.author)}</span>

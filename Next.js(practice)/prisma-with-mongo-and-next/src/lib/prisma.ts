@@ -1,10 +1,19 @@
-import { PrismaClient } from "../generated/prisma";
+// 1. Change this line to import from the standard '@prisma/client' 
+import { PrismaClient } from "@prisma/client"; 
+import { PrismaPg } from "@prisma/adapter-pg";
 
 declare global {
   var __prisma: PrismaClient | undefined;
 }
 
-const prisma = global.__prisma ?? new PrismaClient();
+function createPrismaClient() {
+  const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL!,
+  });
+  return new PrismaClient({ adapter });
+}
+
+const prisma = global.__prisma ?? createPrismaClient();
 if (process.env.NODE_ENV !== "production") global.__prisma = prisma;
 
 export default prisma;

@@ -17,8 +17,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Comment is required" }, { status: 400 });
   }
 
-  if (!postId) {
+  let parsedPostId: number;
+  if (typeof body.postId === "number") {
+    parsedPostId = body.postId;
+  } else if (typeof body.postId === "string" && body.postId.trim() !== "") {
+    parsedPostId = parseInt(body.postId, 10);
+  } else {
     return NextResponse.json({ error: "Post id is required" }, { status: 400 });
+  }
+
+  if (isNaN(parsedPostId)) {
+    return NextResponse.json({ error: "Invalid Post id format" }, { status: 400 });
   }
 
   const author = authorEmail
@@ -35,7 +44,7 @@ export async function POST(request: Request) {
   const comment = await prisma.comment.create({
     data: {
       body: commentBody,
-      post: { connect: { id: postId } },
+      post: { connect: { id: parsedPostId } },
       author: author ? { connect: { id: author.id } } : undefined,
     },
     include: { author: true },

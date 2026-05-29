@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type CommentFormProps = {
-  postId: string;
+  postId: number;
 };
 
 export default function CommentForm({ postId }: CommentFormProps) {

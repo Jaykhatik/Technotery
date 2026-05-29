@@ -1,17 +1,22 @@
 import Link from "next/link";
-import type { Post, User } from "../../generated/prisma";
+import type { Post, User, Tag } from "@prisma/client";
 import prisma from "../../lib/prisma";
 
 type PostListItem = Post & {
   author: User | null;
-  comments: Array<{ id: string }>;
+  comments: Array<{ id: number }>;
+  tags: Tag[];
 };
 
 export const dynamic = "force-dynamic";
 
 async function getPosts(): Promise<PostListItem[]> {
   return prisma.post.findMany({
-    include: { author: true, comments: { select: { id: true } } },
+    include: {
+      author: true,
+      comments: { select: { id: true } },
+      tags: true,
+    },
     orderBy: { createdAt: "desc" },
   });
 }
@@ -82,6 +87,25 @@ export default async function PostsPage() {
                   <span className="comment-count">{post.comments.length} comments</span>
                 </div>
                 <h2>{post.title}</h2>
+                {post.tags && post.tags.length > 0 ? (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "0.85rem" }}>
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag.id}
+                        style={{
+                          background: "var(--accent-soft, #d9f5ef)",
+                          color: "var(--accent-strong, #0b5f59)",
+                          fontWeight: "800",
+                          padding: "0.15rem 0.5rem",
+                          borderRadius: "999px",
+                          fontSize: "0.72rem",
+                        }}
+                      >
+                        #{tag.name}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
                 <p>{getExcerpt(post.content)}</p>
                 <div className="post-meta">
                   <span className="author-row">
