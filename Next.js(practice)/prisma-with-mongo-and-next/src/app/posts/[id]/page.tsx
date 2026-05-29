@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Comment, Post, User, Tag } from "@prisma/client";
 import prisma from "../../../lib/prisma";
 import CommentForm from "./CommentForm";
+import PostActions from "./PostActions";
+import CommentItem from "./CommentItem";
 
 type PostDetail = Post & {
   author: User | null;
@@ -63,6 +65,12 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
             <span className={post.published ? "status published" : "status draft"}>
               {post.published ? "Published" : "Draft"}
             </span>
+            <PostActions
+              postId={post.id}
+              initialTitle={post.title}
+              initialContent={post.content}
+              initialPublished={post.published}
+            />
           </div>
 
           <header className="article-header">
@@ -119,16 +127,14 @@ export default async function PostPage({ params }: { params: Promise<{ id: strin
           ) : (
             <ul className="comments-list">
               {post.comments.map((comment) => (
-                <li className="comment-item" key={comment.id}>
-                  <p>{comment.body}</p>
-                  <div className="post-meta">
-                    <span className="author-row">
-                      <span className="avatar">{getInitial(comment.author)}</span>
-                      {getAuthorName(comment.author)}
-                    </span>
-                    <span>{formatDate(comment.createdAt)}</span>
-                  </div>
-                </li>
+                <CommentItem
+                  key={comment.id}
+                  commentId={comment.id}
+                  body={comment.body}
+                  authorName={getAuthorName(comment.author)}
+                  authorInitial={getInitial(comment.author)}
+                  date={formatDate(comment.createdAt)}
+                />
               ))}
             </ul>
           )}
