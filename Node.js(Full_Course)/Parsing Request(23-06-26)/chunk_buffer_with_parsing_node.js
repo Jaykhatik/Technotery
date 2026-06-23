@@ -1,8 +1,8 @@
-
+const { error } = require("console");
 const fs = require("fs");
 const { URLSearchParams } = require("url");
 
-const userrequestHandler=(req, res) => {
+const userrequestHandler = (req, res) => {
   console.log(req.url, req.method);
   res.setHeader("content-type", "text/html");
 
@@ -34,7 +34,7 @@ const userrequestHandler=(req, res) => {
     // res.write("<body><h1>Details submitted successfully!</h1><a href=\"/\">Go back to Home</a></body>");
     // res.write("</html>");
 
-    const body = [];//store the chunks
+    const body = []; //store the chunks
 
     /*read single chunks*/
     req.on("data", (chunk) => {
@@ -54,13 +54,16 @@ const userrequestHandler=(req, res) => {
       //   bodyObject[key]=val;
 
       // }
-      const bodyObject=Object.fromEntries(params);
+      const bodyObject = Object.fromEntries(params);
       console.log(bodyObject);
-      fs.writeFileSync("user1.txt",JSON.stringify(bodyObject));
+      // fs.writeFileSync("user1.txt",JSON.stringify(bodyObject));//beacuse writefilesyncs is blocking the code thats why we do not use that
+      fs.writeFile("user1.txt", JSON.stringify(bodyObject), (error) => {
+        console.log("Data written successfully");
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+        return res.end();
+      });
     });
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    return res.end();
   } else {
     res.write("<html>");
     res.write("<head><title>program</title></head>");
@@ -70,4 +73,4 @@ const userrequestHandler=(req, res) => {
   }
 };
 
-module.exports=userrequestHandler;
+module.exports = userrequestHandler;
