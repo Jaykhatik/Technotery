@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirBnb Clone</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/theme/theme.css">
+    <script src="/theme/theme-toggle.js"></script>
+  </head>
+  <body>
+    <div class="retro-paper-container">
+      <%- include('partials/nav') %>
+      <div class="hero-section" style="padding-top: 3rem; padding-bottom: 4rem;">
+        <div class="hero-title" style="font-size: 6rem; line-height: 1; margin-bottom: 1rem;">DISCOVER UNIQUE HOMES</div>
+        <p style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem auto; line-height: 1.6;">
+          Find the perfect retro getaway. Hand-picked properties combining vintage aesthetic charm with modern comfort and luxury.
+        </p>
+        
+        <div style="max-width: 700px; margin: 0 auto; display: flex; border: 4px solid var(--text-main); box-shadow: 6px 6px 0px var(--text-main); background: var(--bg-color); border-radius: 4px; overflow: hidden;">
+          <input type="text" placeholder="Where do you want to go?" style="flex: 1; border: none; padding: 1.2rem 1.5rem; outline: none; background: transparent; font-size: 1.1rem; font-family: 'Inter', sans-serif; color: var(--text-main);">
+          <button class="btn-primary" style="border: none; border-left: 4px solid var(--text-main); padding: 0 2.5rem; margin: 0; box-shadow: none; border-radius: 0;">SEARCH</button>
+        </div>
+      </div>
+      <div class="container">
+      <% if (homes.length > 0) { %>
+        <div class="homes-grid">
+          <% homes.forEach(function(home, index) { %>
+            <div class="home-card">
+              <div style="position: relative;">
+                <img src="<%= home.photoUrl %>" alt="<%= home.homeName %>" class="home-card-image" />
+                <svg class="heart-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z"></path></svg>
+              </div>
+              <div class="home-card-content">
+                <div class="home-card-header">
+                  <div class="home-card-title"><%= home.location %></div>
+                  <div class="home-card-rating">★ <%= home.rating %></div>
+                </div>
+                <div class="home-card-location"><%= home.homeName %></div>
+                <div class="home-card-price"><span>$<%= home.price %></span>/Night</div>
+                
+                <div class="home-card-actions">
+                  <a href="/homes/<%= home.id %>" class="btn-action" style="text-decoration: none; text-align: center; line-height: 1.5; color: var(--text-main);">View</a>
+                  <button class="btn-action edit-btn">Edit</button>
+                  <button class="btn-action delete-btn">Delete</button>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="center-wrapper">
+          <div class="paper-frame" style="text-align: center;">
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1rem;">No homes registered yet.</p>
+            <a href="/host/add-home" class="btn-primary" style="display:inline-block; text-decoration:none;">Be the first to add one!</a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+      <%- include('partials/footer') %>
+    </div>
+  </body>
+</html>

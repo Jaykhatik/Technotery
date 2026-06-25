@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb your home</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/theme/theme.css">
+    <script src="/theme/theme-toggle.js"></script>
+  </head>
+  <body>
+    <div class="retro-paper-container">
+      <%- include('partials/nav') %>
+    <div class="center-wrapper">
+      <div class="paper-frame">
+        <h1>Airbnb your home</h1>
+        
+        <% if (errors.length > 0) { %>
+          <div style="background: rgba(255, 56, 92, 0.05); border: 1px solid var(--primary-color); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1rem;">Please fix the following:</h3>
+            <ul style="color: var(--primary-color); font-size: 0.9rem; padding-left: 1.5rem; margin: 0;">
+              <% errors.forEach(function(err) { %>
+                <li><%= err.msg %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <form action="/host/add-home" method="POST">
+          <input
+            type="text"
+            name="homeName"
+            placeholder="Enter the property name"
+            value="<%= oldInput.homeName || '' %>"
+            required
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Price per night ($)"
+            value="<%= oldInput.price || '' %>"
+            required
+          />
+          <input
+            type="text"
+            name="location"
+            placeholder="Location (e.g. city or region)"
+            value="<%= oldInput.location || '' %>"
+            required
+          />
+          <input
+            type="number"
+            step="0.1"
+            name="rating"
+            placeholder="Rating (0.0 to 5.0)"
+            value="<%= oldInput.rating || '' %>"
+            required
+          />
+          <input
+            type="text"
+            name="type"
+            placeholder="Property Type (e.g. Entire Villa, Private Room)"
+            value="<%= oldInput.type || '' %>"
+            required
+          />
+          <textarea
+            name="description"
+            placeholder="Property Description"
+            required
+            style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 4px solid var(--text-main); font-family: 'Inter', sans-serif; font-size: 1rem; border-radius: 4px;"
+            rows="4"
+          ><%= oldInput.description || '' %></textarea>
+          <input
+            type="text"
+            name="highlights"
+            placeholder="Highlights (comma separated: WiFi, Pool, Gym)"
+            value="<%= oldInput.highlights || '' %>"
+            required
+          />
+          <input
+            type="text"
+            name="photoUrl"
+            placeholder="Enter Image URL (e.g. https://... or /house.jpg)"
+            value="<%= oldInput.photoUrl || '' %>"
+            required
+          />
+          <input type="submit" value="Add Home" class="btn-primary" />
+        </form>
+        <a href="/" class="back-link">← Cancel</a>
+      </div>
+    </div>
+      <%- include('partials/footer') %>
+    </div>
+  </body>
+</html>

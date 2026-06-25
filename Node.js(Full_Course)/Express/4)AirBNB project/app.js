@@ -1,21 +1,25 @@
 const path = require("path");
-
 const express = require("express");
 const userRouter = require("./routes/useRouter");
 const hostRouter = require("./routes/hostRouter");
-const pathUtil = require("./utils/pathUtil");
+const errorController = require("./controllers/errorController");
 
 const app = express();
 
-app.use(express.urlencoded());
+// Set up the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// 2. Global Middlewares (Always parse body & serve static files FIRST)
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+// 3. Routing
 app.use(userRouter);
 app.use("/host", hostRouter);
-app.use(express.static(path.join(pathUtil,'public')));//for make public folder css for public use
 
-const errorController = require("./controllers/errorController");
+// 4. Error Handling (Must be last)
 app.use(errorController.get404);
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`server is running at http://localhost:${PORT}`);
-});
+// Export the fully configured express app
+module.exports = app;
