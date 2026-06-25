@@ -1,18 +1,9 @@
-const path = require("path");
-
 const express = require("express");
-const pathUtil = require("../utils/pathUtil");
 const hostRouter = express.Router();
 
+const hostController = require("../controllers/hostController");
 
-hostRouter.get("/add-home", (req, res, next) => {
-  // res.sendFile(path.join(__dirname, "../", "views", "addHome.html"));
-  res.sendFile(path.join(pathUtil, "views", "addHome.html"));
-});
-hostRouter.post("/add-home", (req, res, next) => {
-  console.log(req.body);
-  // res.sendFile(path.join(__dirname, "../", "views", "homeAdded.html"));
-  res.sendFile(path.join(pathUtil, "views", "homeAdded.html"));
-});
+hostRouter.get("/add-home", hostController.getAddHome);
+hostRouter.post("/add-home", hostController.postAddHome);
 
 module.exports = hostRouter;

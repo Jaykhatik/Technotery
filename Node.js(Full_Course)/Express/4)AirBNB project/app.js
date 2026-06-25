@@ -10,14 +10,10 @@ const app = express();
 app.use(express.urlencoded());
 app.use(userRouter);
 app.use("/host", hostRouter);
-
 app.use(express.static(path.join(pathUtil,'public')));//for make public folder css for public use
 
-//add custome 404 page with status
-app.use((req, res, next) => {
-  // res.status(404).sendFile(path.join(__dirname, "views", "pnf.html"));
-  res.status(404).sendFile(path.join(pathUtil, "views", "pnf.html"));
-});
+const errorController = require("./controllers/errorController");
+app.use(errorController.get404);
 
 const PORT = 3000;
 app.listen(PORT, () => {
