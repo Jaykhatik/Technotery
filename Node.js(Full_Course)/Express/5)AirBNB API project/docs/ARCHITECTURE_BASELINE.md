@@ -3,7 +3,7 @@
 ## Project Structure Tree
 
 ```
-5)AirBNB API project/
+AirBNB API project/
 ├── backend/
 │   ├── config/             # Configuration files
 │   ├── controllers/        # Route handlers (authController, homeController, etc.)
