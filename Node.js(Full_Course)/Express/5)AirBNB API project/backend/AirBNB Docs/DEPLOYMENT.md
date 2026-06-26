@@ -99,7 +99,7 @@ touch server/public/uploads/.gitkeep
 
 Express serves the folder at `/uploads/*`:
 ```typescript
-// server/src/app.ts
+// server/src/app.js
 import path from 'path';
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 ```
@@ -171,7 +171,7 @@ cd client && npm run dev
 ```json
 {
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/server.js",
     "build": "tsc --project tsconfig.json",
     "start": "node dist/server.js",
     "lint": "eslint src --ext .ts",
@@ -480,7 +480,7 @@ jobs:
 ```bash
 # Run once after deploy
 npm run db:indexes
-# server/src/scripts/createIndexes.ts
+# server/src/scripts/createIndexes.js
 ```
 
 ---

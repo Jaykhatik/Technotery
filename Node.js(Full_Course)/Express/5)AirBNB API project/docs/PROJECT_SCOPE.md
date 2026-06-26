@@ -15,17 +15,18 @@ The main entities are:
 ## Tech Stack
 ### Backend
 - **Runtime**: Node.js
-- **Framework**: Express.js (^5.2.1)
-- **Authentication**: jsonwebtoken (^9.0.3), bcryptjs (^3.0.3)
-- **Validation**: express-validator (^7.3.2)
-- **Data Storage**: MongoDB Atlas via mongoose
-- **Dev Tools**: nodemon (^3.1.14), dotenv (^17.4.2)
-- **Security & Network**: cors, cookie-parser
+- **Framework**: Express (Node.js) + Vanilla JS
+- **Database**: MongoDB Atlas + Mongoose
+- **Authentication**: JWT (`jsonwebtoken`), `bcryptjs`
+- **Security & Network**: `cors`, `cookie-parser`, `helmet`, `express-rate-limit`
+- **Validation**: `express-validator`
+- **Logging**: `winston`
 
-### Frontend
-- **Framework**: React (^19.2.7) with TypeScript (~6.0.2)
-- **Bundler**: Vite (^8.1.0)
-- **Styling**: Vanilla CSS (index.css)
+## Frontend Dependencies
+- **Framework**: React 18 (TypeScript) + Vite
+- **Routing**: `react-router-dom`
+- **Networking**: `axios`
+- **Styling**: `tailwindcss`, `@tailwindcss/vite` (V4 Architecture)
 - **Linting**: ESLint (^10.5.0)
 
 ## Architecture Intent

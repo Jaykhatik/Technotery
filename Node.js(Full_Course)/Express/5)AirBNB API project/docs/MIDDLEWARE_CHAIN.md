@@ -5,12 +5,15 @@ The Express backend relies on a sequential middleware pipeline defined in `app.j
 
 ## 1. Global Pre-Processing
 ```javascript
+app.use(helmet());
+app.use(apiLimiter);
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 ```
-- Configures cross-origin requests, parses incoming `httpOnly` cookies, and ensures request bodies are parsed as JSON.
+- **Security First**: `helmet` secures HTTP headers, and `apiLimiter` protects against DDOS.
+- **Data Parsing**: Configures cross-origin requests, parses incoming `httpOnly` cookies, and ensures request bodies are parsed as JSON.
 
 ## 2. Route Handling (Routers as Middleware)
 ```javascript
@@ -23,6 +26,8 @@ app.use("/auth", authRouter);
 
 ## 3. Global Error Handling
 ```javascript
-app.use(errorController.get404);
+app.use((req, res, next) => next(new ApiError(404, "Endpoint Not Found")));
+app.use(errorHandler);
 ```
-- If a request falls through all previous routers without a match, this middleware catches it and returns a standard `404 Not Found` JSON error.
+- The 404 middleware catches unmatched routes and throws an `ApiError`.
+- The `errorHandler` intercepts all thrown `ApiError`s, logs them via `winston`, and returns a clean JSON response.

@@ -2,7 +2,7 @@
 
 ## Connection
 
-Connect via `server/src/config/db.ts`. Use `MONGODB_URI` env var. Enable `autoIndex: false` in production (run index creation separately).
+Connect via `server/src/config/db.js`. Use `MONGODB_URI` env var. Enable `autoIndex: false` in production (run index creation separately).
 
 ---
 

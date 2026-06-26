@@ -43,6 +43,13 @@ When instructed to create a new feature or endpoint, follow this deterministic s
 
 ---
 
+## 🩺 4. Error Handling & Validation
+- **Global Error Handling**: Never write `try/catch` blocks in controllers. Wrap all async controller functions in `asyncHandler`.
+- **Api Errors**: When throwing a custom error, always `throw new ApiError(statusCode, "Message")`. The global `error.middleware.js` will catch it and log it via Winston.
+- **Success Responses**: Always return successful data using `new ApiResponse(200, "Success", data)`.
+
+---
+
 ## 📜 5. Code Quality & Standards
 - **Immutability**: Avoid mutating parameters; favor pure functions where possible.
 - **Modularity**: Keep controllers thin. Delegate complex logic to models or dedicated service layers.

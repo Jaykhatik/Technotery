@@ -12,7 +12,7 @@ This project follows a **3-tier architecture** with a clear separation between t
 ┌─────────────────────────────────────────────────────────────────┐
 │                         CLIENT (React + TS)                     │
 │  ┌──────────┐  ┌───────────┐  ┌──────────┐  ┌──────────────┐  │
-│  │  Pages   │  │Components │  │  Zustand │  │ React Query  │  │
+│  │  Pages   │  │Components │  │ Context API │  │ Custom Hooks │  │
 │  │ (Routes) │→ │  (UI)     │  │  (State) │  │ (Server Data)│  │
 │  └──────────┘  └───────────┘  └──────────┘  └──────────────┘  │
 │                      │                              │           │
@@ -21,13 +21,13 @@ This project follows a **3-tier architecture** with a clear separation between t
                               │ HTTPS / REST
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│                      SERVER (Express + TS)                      │
+│                      SERVER (Express + Vanilla JS)                      │
 │                                                                 │
 │  Request → [Helmet] → [CORS] → [RateLimit] → Router            │
 │                                                  │              │
 │                                          [authMiddleware]       │
 │                                                  │              │
-│                                          [validate (Zod)]       │
+│                                          [validate (express-validator)]       │
 │                                                  │              │
 │                                            Controller           │
 │                                                  │              │
@@ -57,7 +57,7 @@ This project follows a **3-tier architecture** with a clear separation between t
 5. Router → match route
 6. authMiddleware → verify JWT, attach req.user
 7. roleMiddleware → check req.user.role if route is role-restricted
-8. validate() → run Zod schema against req.body / req.query / req.params
+8. validate() → run express-validator schema against req.body / req.query / req.params
 9. asyncHandler(controller) → call controller, catch errors
 10. Controller → call service function(s)
 11. Service → Mongoose query / external API call
@@ -69,7 +69,7 @@ This project follows a **3-tier architecture** with a clear separation between t
 ```
 1. Any middleware/controller/service throws ApiError or generic Error
 2. asyncHandler catches it and calls next(error)
-3. error.middleware.ts handles:
+3. error.middleware.js handles:
    - ApiError → use its statusCode and message
    - Mongoose ValidationError → 400
    - Mongoose CastError (bad ObjectId) → 400
@@ -85,7 +85,7 @@ This project follows a **3-tier architecture** with a clear separation between t
 ### Registration
 ```
 Client → POST /api/auth/register
-  → Validate (Zod)
+  → Validate (express-validator)
   → Check email uniqueness
   → Hash password (bcrypt 12 rounds)
   → Create User document
@@ -245,7 +245,7 @@ Role is stored in the User document and checked by `roleMiddleware`.
 | Check-in reminder | Guest | `checkin-reminder` (24h before) |
 | New review | Host | `new-review` |
 
-Emails are sent via the `email.service.ts` which uses SendGrid/Nodemailer with HTML templates in `server/src/templates/email/`.
+Emails are sent via the `email.service.js` which uses SendGrid/Nodemailer with HTML templates in `server/src/templates/email/`.
 
 ---
 

@@ -18,8 +18,8 @@
 - Every new env var must be added to `.env.example` with a placeholder value and a comment explaining what it is.
 
 ### R-003 · Input Validation on Every Route
-- Every Express route that accepts a request body, query params, or URL params MUST validate input using a **Zod schema** in `server/src/utils/validators/`.
-- Validation runs via `validate.middleware.ts` before the controller is called.
+- Every Express route that accepts a request body, query params, or URL params MUST validate input using a **express-validator schema** in `server/src/utils/validators/`.
+- Validation runs via `validate.middleware.js` before the controller is called.
 - Never trust `req.body` directly in a controller.
 
 ### R-004 · Authentication & Authorization
@@ -29,12 +29,12 @@
 - JWT secrets must be at least 32 characters. Access token TTL: 15 minutes. Refresh token TTL: 7 days.
 
 ### R-005 · Async Error Handling
-- All async Express route handlers MUST be wrapped with `asyncHandler()` from `server/src/utils/asyncHandler.ts`.
-- Never use naked `try/catch` in controllers — let `asyncHandler` catch it and forward to `error.middleware.ts`.
+- All async Express route handlers MUST be wrapped with `asyncHandler()` from `server/src/utils/asyncHandler.js`.
+- Never use naked `try/catch` in controllers — let `asyncHandler` catch it and forward to `error.middleware.js`.
 - Throw `new ApiError(statusCode, message)` — never `res.status(xxx).json(...)` for errors.
 
 ### R-006 · Standard Response Shape
-- Every successful API response MUST use `ApiResponse` from `server/src/utils/ApiResponse.ts`.
+- Every successful API response MUST use `ApiResponse` from `server/src/utils/ApiResponse.js`.
 - Shape: `{ success: true, message: string, data: T, meta?: PaginationMeta }`.
 - Never return raw objects directly from controllers.
 
@@ -52,12 +52,12 @@
 - Always create indexes for fields used in `find()`, `sort()`, and `$lookup`.
 
 ### R-009 · No Direct `console.log` in Production Code
-- Use the project logger (`server/src/utils/logger.ts` — Winston) for all server-side logging.
+- Use the project logger (`server/src/utils/logger.js` — Winston) for all server-side logging.
 - `console.log` is permitted ONLY in one-off scripts or tests.
 - Log levels: `error` for crashes, `warn` for degraded state, `info` for lifecycle events, `debug` for development traces.
 
 ### R-010 · File Uploads
-- File uploads go through `upload.middleware.ts` (Multer with disk storage).
+- File uploads go through `upload.middleware.js` (Multer with disk storage).
 - Files are saved to `server/public/uploads/{subfolder}/` using a `{timestamp}-{uuid}.{ext}` filename.
 - Never use the original filename from the client — always generate a new name to prevent path traversal.
 - Validate MIME type (images only: jpeg, png, webp, gif) and file size (max 5MB) before saving.
@@ -77,7 +77,7 @@
 ### A-002 · Route File Structure
 Every route file must follow this pattern:
 ```ts
-// server/src/routes/example.routes.ts
+// server/src/routes/example.routes.js
 import { Router } from 'express';
 import { authMiddleware } from '../middleware/auth.middleware';
 import { roleMiddleware } from '../middleware/role.middleware';
@@ -100,9 +100,8 @@ export default router;
 - Services use the pre-configured axios instance from `client/src/services/api.ts` which handles auth headers and token refresh.
 
 ### A-004 · State Management
-- Global state (auth user, filters, cart) lives in **Zustand** stores in `client/src/store/`.
-- Server state (listings, bookings, reviews) is managed by **React Query** (TanStack Query).
-- Never store server-fetched data in Zustand — only client-side UI state.
+- Global state (auth user, filters, cart) lives in **React Context** providers in `client/src/context/`.
+- Server state (listings, bookings, reviews) is managed by standard React `useState` and `useEffect` hooks or custom data-fetching hooks.
 
 ### A-005 · Component Rules
 - Components must be functional. No class components.
@@ -126,7 +125,7 @@ export default router;
 |-------|-----------|---------|
 | Files (components) | PascalCase | `ListingCard.tsx` |
 | Files (utils/hooks) | camelCase | `useListings.ts` |
-| Files (routes/controllers) | kebab-case | `listing.routes.ts` |
+| Files (routes/controllers) | kebab-case | `listing.routes.js` |
 | Variables / functions | camelCase | `getUserById` |
 | Types / Interfaces | PascalCase | `BookingStatus` |
 | Enums | PascalCase + UPPER values | `Role.ADMIN` |
@@ -160,7 +159,7 @@ All numeric constants (HTTP status codes not from `http-status`, limits, timeout
 ## 🔵 SECURITY RULES
 
 ### SEC-001 · Helmet & CORS
-- `helmet()` must be applied as the first middleware in `app.ts`.
+- `helmet()` must be applied as the first middleware in `app.js`.
 - CORS must only allow origins defined in `ALLOWED_ORIGINS` env var.
 - Never use `cors({ origin: '*' })` in production.
 
@@ -168,7 +167,7 @@ All numeric constants (HTTP status codes not from `http-status`, limits, timeout
 - All auth routes (`/api/auth/*`) must have a strict rate limiter: 10 requests / 15 minutes per IP.
 - All other API routes must have a general rate limiter: 100 requests / 15 minutes per IP.
 - Use `express-rate-limit` with the default in-memory store. This resets on server restart — acceptable for single-server deployments.
-- Configure via `rateLimit.middleware.ts`, not inline in routes.
+- Configure via `rateLimit.middleware.js`, not inline in routes.
 
 ### SEC-003 · Password Hashing
 - Always hash passwords with `bcrypt` at a cost factor of 12.
@@ -262,7 +261,7 @@ If you are an AI model generating code for this project:
 2. **Check DATABASE.md** before writing any Mongoose model or query.
 3. **Check STRIPE.md** before writing any payment-related code.
 4. **Never generate a file without its corresponding TypeScript types.**
-5. **Always generate the Zod validator alongside any new route.**
+5. **Always generate the express-validator validator alongside any new route.**
 6. **If you add a new env var, update `.env.example` in the same response.**
 7. **When generating a model, also generate the indexes** as defined in DATABASE.md.
 8. **Always wrap async route handlers in `asyncHandler`** — never raw async functions.

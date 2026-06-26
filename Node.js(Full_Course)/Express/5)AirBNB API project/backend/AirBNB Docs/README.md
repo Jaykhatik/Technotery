@@ -9,7 +9,7 @@
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 18 + TypeScript + Vite + TailwindCSS |
-| Backend | Node.js + Express.js + TypeScript |
+| Backend | Node.js + Express.js + Vanilla JS |
 | Database | MongoDB + Mongoose ODM |
 | Auth | JWT (Access + Refresh Tokens) + bcrypt |
 | Payments | Stripe (Checkout + Webhooks) |
@@ -49,7 +49,7 @@ airbnb-clone/
 │   │   │       ├── Login.tsx
 │   │   │       └── Register.tsx
 │   │   ├── hooks/                 # Custom React hooks
-│   │   ├── store/                 # Zustand state management
+│   │   ├── context/               # React Context providers
 │   │   ├── services/              # API client (axios instances)
 │   │   ├── types/                 # Shared TypeScript types
 │   │   ├── utils/                 # Helper functions
@@ -61,7 +61,7 @@ airbnb-clone/
 │   ├── tsconfig.json
 │   └── package.json
 │
-├── server/                        # Express + TypeScript backend
+├── server/                        # Express + Vanilla JS backend
 │   ├── src/
 │   │   ├── config/
 │   │   │   ├── db.ts              # MongoDB connection
@@ -73,45 +73,45 @@ airbnb-clone/
 │   │   │   ├── Review.ts
 │   │   │   └── Payment.ts
 │   │   ├── controllers/
-│   │   │   ├── auth.controller.ts
-│   │   │   ├── listing.controller.ts
-│   │   │   ├── booking.controller.ts
-│   │   │   ├── payment.controller.ts
-│   │   │   ├── review.controller.ts
-│   │   │   └── user.controller.ts
+│   │   │   ├── auth.controller.js
+│   │   │   ├── listing.controller.js
+│   │   │   ├── booking.controller.js
+│   │   │   ├── payment.controller.js
+│   │   │   ├── review.controller.js
+│   │   │   └── user.controller.js
 │   │   ├── routes/
-│   │   │   ├── auth.routes.ts
-│   │   │   ├── listing.routes.ts
-│   │   │   ├── booking.routes.ts
-│   │   │   ├── payment.routes.ts
-│   │   │   ├── review.routes.ts
-│   │   │   └── user.routes.ts
+│   │   │   ├── auth.routes.js
+│   │   │   ├── listing.routes.js
+│   │   │   ├── booking.routes.js
+│   │   │   ├── payment.routes.js
+│   │   │   ├── review.routes.js
+│   │   │   └── user.routes.js
 │   │   ├── middleware/
-│   │   │   ├── auth.middleware.ts  # JWT verification
-│   │   │   ├── role.middleware.ts  # Role-based access
-│   │   │   ├── validate.middleware.ts # Zod schema validation
-│   │   │   ├── rateLimit.middleware.ts
-│   │   │   ├── upload.middleware.ts # Multer → public/uploads/
-│   │   │   └── error.middleware.ts # Global error handler
+│   │   │   ├── auth.middleware.js  # JWT verification
+│   │   │   ├── role.middleware.js  # Role-based access
+│   │   │   ├── validate.middleware.js # express-validator schema validation
+│   │   │   ├── rateLimit.middleware.js
+│   │   │   ├── upload.middleware.js # Multer → public/uploads/
+│   │   │   └── error.middleware.js # Global error handler
 │   │   ├── services/
-│   │   │   ├── auth.service.ts
-│   │   │   ├── listing.service.ts
-│   │   │   ├── booking.service.ts
-│   │   │   ├── payment.service.ts
-│   │   │   ├── email.service.ts
-│   │   │   └── stripe.service.ts
+│   │   │   ├── auth.service.js
+│   │   │   ├── listing.service.js
+│   │   │   ├── booking.service.js
+│   │   │   ├── payment.service.js
+│   │   │   ├── email.service.js
+│   │   │   └── stripe.service.js
 │   │   ├── utils/
 │   │   │   ├── ApiError.ts        # Custom error class
 │   │   │   ├── ApiResponse.ts     # Standard response wrapper
 │   │   │   ├── asyncHandler.ts    # Async try/catch wrapper
 │   │   │   ├── jwt.ts
-│   │   │   └── validators/        # Zod schemas
+│   │   │   └── validators/        # express-validator schemas
 │   │   ├── types/
 │   │   │   └── index.ts           # Express + custom type extensions
 │   │   ├── jobs/
 │   │   │   └── expireBookings.ts  # Cron: auto-expire pending bookings
-│   │   └── app.ts                 # Express app setup
-│   ├── server.ts                  # Entry point
+│   │   └── app.js                 # Express app setup
+│   ├── server.js                  # Entry point
 │   ├── .env.example
 │   ├── tsconfig.json
 │   └── package.json

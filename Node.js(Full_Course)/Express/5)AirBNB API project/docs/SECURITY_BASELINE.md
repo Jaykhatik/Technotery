@@ -14,3 +14,5 @@ Role-Based Access Control is enforced via the `authorizeRoles` middleware.
 ## Best Practices Enforced
 - **Encryption**: User passwords are encrypted using `bcryptjs` before persisting to the MongoDB database.
 - **Validation**: Incoming requests to `/auth/*` and `/host/*` are heavily sanitized and validated using `express-validator` to prevent malicious payloads.
+- **DDOS Protection**: All routes are protected by `express-rate-limit`, capping clients to 100 requests per 15 minutes.
+- **HTTP Security**: The `helmet` middleware obscures server identifying headers and configures strict Content Security Policies.

@@ -6,15 +6,14 @@
 AirBNB API project/
 ├── backend/
 │   ├── config/             # Configuration files
-│   ├── controllers/        # Route handlers (authController, homeController, etc.)
-│   ├── middlewares/        # Custom middlewares (authMiddleware.js)
-│   ├── models/             # Mongoose Schemas & Models (home.js, user.js)
-│   ├── routes/             # Express routers (authRoutes, hostRouter, useRouter)
-│   ├── services/           # Business logic abstraction (if used)
-│   ├── utils/              # Helper utilities
-│   ├── validations/        # Express-validator schemas
-│   ├── app.js              # Express app setup and middleware chain
+│   ├── middlewares/        # Custom middlewares (auth, error, rateLimit)
+│   ├── models/             # Mongoose schemas (home, user)
+│   ├── routes/             # Express routers
+│   ├── utils/              # Helper classes (ApiError, ApiResponse, asyncHandler, logger)
+│   ├── validations/        # Express-validator logic
+│   ├── app.js              # Express app configuration (helmet, cors, etc.)
 │   └── server.js           # Server entry point
+├── docs/                   # Documentation single-source of truth
 └── frontend/
     ├── public/             # Static assets
     ├── src/                # React components and TSX entry (main.tsx, App.tsx)

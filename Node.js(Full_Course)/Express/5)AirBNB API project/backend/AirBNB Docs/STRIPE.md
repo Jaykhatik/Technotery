@@ -23,7 +23,7 @@ STRIPE_WEBHOOK_SECRET=whsec_...        # From `stripe listen` or Dashboard
 `POST /api/payments/create-checkout-session`
 
 ```typescript
-// server/src/services/stripe.service.ts
+// server/src/services/stripe.service.js
 import Stripe from 'stripe';
 import { stripe } from '../config/stripe';
 
@@ -69,7 +69,7 @@ export const createCheckoutSession = async (
 ### Step 2 — Client Redirects to Stripe
 
 ```typescript
-// client/src/services/payment.service.ts
+// client/src/services/payment.service.js
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -90,7 +90,7 @@ export const redirectToCheckout = async (sessionId: string): Promise<void> => {
 > Register it BEFORE the global `express.json()` middleware.
 
 ```typescript
-// server/src/controllers/payment.controller.ts
+// server/src/controllers/payment.controller.js
 import { Request, Response } from 'express';
 import Stripe from 'stripe';
 import { stripe } from '../config/stripe';
@@ -268,7 +268,7 @@ stripe listen --forward-to localhost:5000/api/payments/webhook
 ## Route Registration Order (Critical)
 
 ```typescript
-// app.ts — ORDER MATTERS
+// app.js — ORDER MATTERS
 import express from 'express';
 const app = express();
 
@@ -308,7 +308,7 @@ Use Stripe test cards:
 ## Stripe Config File
 
 ```typescript
-// server/src/config/stripe.ts
+// server/src/config/stripe.js
 import Stripe from 'stripe';
 
 if (!process.env.STRIPE_SECRET_KEY) {

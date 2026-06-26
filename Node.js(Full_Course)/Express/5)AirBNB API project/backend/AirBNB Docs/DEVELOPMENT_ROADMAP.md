@@ -1,6 +1,6 @@
 # 🏠 AirBnB Clone — Development Roadmap
 
-> A production-ready Airbnb clone built with **React + TypeScript**, **Express + TypeScript**, **MongoDB**, and **Stripe** payments.
+> A production-ready Airbnb clone built with **React + TypeScript**, **Express + Vanilla JS**, **MongoDB**, and **Stripe** payments.
 > This document is your step-by-step build guide. Follow phases in order. Do not skip phases.
 
 ---
@@ -11,15 +11,15 @@
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                          CLIENT  (React + TS)                           │
 │                                                                         │
-│   Pages ──► Components ──► Zustand (UI State)                          │
+│   Pages ──► Components ──► React Context (UI State)                    │
 │                │                                                        │
-│            services/           React Query (Server State)              │
+│            services/           Custom Hooks (Server State)             │
 │           (axios layer)               │                                 │
 └──────────────────┬────────────────────┼────────────────────────────────┘
                    │   HTTPS / REST     │
                    ▼                    ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         SERVER  (Express + TS)                          │
+│                         SERVER  (Express + Vanilla JS)                          │
 │                                                                         │
 │  Request                                                                │
 │    │                                                                    │
@@ -30,7 +30,7 @@
 │                                              │                          │
 │                                       [roleMiddleware]                  │
 │                                              │                          │
-│                                       [validate (Zod)]                  │
+│                                       [validate (express-validator)]                  │
 │                                              │                          │
 │                                    asyncHandler(Controller)             │
 │                                              │                          │
@@ -78,7 +78,7 @@ airbnb-clone/
 │       │       ├── Login.tsx
 │       │       └── Register.tsx
 │       ├── hooks/                 # Custom React hooks
-│       ├── store/                 # Zustand stores
+│       ├── context/               # React Context providers
 │       ├── services/              # Axios API layer
 │       ├── types/                 # Shared TypeScript types
 │       ├── utils/
@@ -99,22 +99,22 @@ airbnb-clone/
 │       ├── controllers/           # HTTP layer only
 │       ├── routes/                # Express routers
 │       ├── middleware/
-│       │   ├── auth.middleware.ts
-│       │   ├── role.middleware.ts
-│       │   ├── validate.middleware.ts
-│       │   ├── rateLimit.middleware.ts
-│       │   ├── upload.middleware.ts
-│       │   └── error.middleware.ts
+│       │   ├── auth.middleware.js
+│       │   ├── role.middleware.js
+│       │   ├── validate.middleware.js
+│       │   ├── rateLimit.middleware.js
+│       │   ├── upload.middleware.js
+│       │   └── error.middleware.js
 │       ├── services/              # Business logic + DB + Stripe
 │       ├── utils/
 │       │   ├── ApiError.ts
 │       │   ├── ApiResponse.ts
 │       │   ├── asyncHandler.ts
 │       │   ├── jwt.ts
-│       │   └── validators/        # Zod schemas
+│       │   └── validators/        # express-validator schemas
 │       ├── jobs/
 │       │   └── expireBookings.ts  # Cron job
-│       └── app.ts
+│       └── app.js
 │
 ├── docs/
 │   ├── AI_CONTEXT.md
@@ -214,7 +214,7 @@ Client (axios)
 ```
 REGISTER
   Client ──► POST /api/auth/register
-               │ Zod validation
+               │ express-validator validation
                │ Check email unique
                │ bcrypt hash (cost 12)
                │ Create User document
@@ -413,29 +413,25 @@ Every API response uses this envelope:
 
 - [ ] Init `server/` with `npm init -y`, install deps:
   ```
-  express typescript ts-node tsx @types/express @types/node
-  mongoose dotenv helmet cors express-rate-limit
-  bcryptjs jsonwebtoken zod winston
-  @types/bcryptjs @types/jsonwebtoken @types/cors
-  eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
-  ```
-- [ ] Create `tsconfig.json` with `"strict": true`
-- [ ] Create `server/src/app.ts` — mount Helmet, CORS, JSON parser, routes placeholder
-- [ ] Create `server/src/server.ts` — entry point, connect DB then start server
-- [ ] Create `server/src/config/db.ts` — MongoDB connection with retry logic
-- [ ] Create `server/src/utils/ApiError.ts`
-- [ ] Create `server/src/utils/ApiResponse.ts`
-- [ ] Create `server/src/utils/asyncHandler.ts`
-- [ ] Create `server/src/utils/logger.ts` (Winston)
-- [ ] Create `server/src/middleware/error.middleware.ts`
-- [ ] Create `server/src/middleware/rateLimit.middleware.ts`
+  express   mongoose dotenv helmet cors express-rate-limit
+  bcryptjs jsonwebtoken express-validator winston
+    eslint   ```
+- [ ] Create `server/src/app.js` — mount Helmet, CORS, JSON parser, routes placeholder
+- [ ] Create `server/src/server.js` — entry point, connect DB then start server
+- [ ] Create `server/src/config/db.js` — MongoDB connection with retry logic
+- [ ] Create `server/src/utils/ApiError.js`
+- [ ] Create `server/src/utils/ApiResponse.js`
+- [ ] Create `server/src/utils/asyncHandler.js`
+- [ ] Create `server/src/utils/logger.js` (Winston)
+- [ ] Create `server/src/middleware/error.middleware.js`
+- [ ] Create `server/src/middleware/rateLimit.middleware.js`
 - [ ] Create `server/.env` from `.env.example`
 - [ ] Verify: `GET /api/health` returns `{ status: "ok" }`
 
 ### Frontend Setup
 
 - [ ] Init with `npm create vite@latest client -- --template react-ts`
-- [ ] Install: `tailwindcss axios zustand @tanstack/react-query react-router-dom`
+- [ ] Install: `tailwindcss axios react-router-dom`
 - [ ] Configure TailwindCSS
 - [ ] Create `client/src/services/api.ts` — base axios instance with auth header + refresh interceptor
 - [ ] Create `client/.env` from `.env.example`
@@ -457,30 +453,30 @@ Every API response uses this envelope:
 
 ### Tasks
 
-- [ ] `server/src/models/User.ts`
+- [ ] `server/src/models/User.js`
   - Fields: `email` (unique), `password` (select:false), `name`, `avatar`, `role`, `refreshTokens[]`, `savedListings[]`, `isVerified`, `phone?`, `bio?`, `stripeAccountId?`
   - Indexes: `{ email: 1 }` unique, `{ role: 1 }`, `{ googleId: 1 }` sparse
   - Pre-save hook: hash password if modified (bcrypt cost 12)
   - Method: `comparePassword()`
 
-- [ ] `server/src/models/Listing.ts`
+- [ ] `server/src/models/Listing.js`
   - Fields: all location, pricing, capacity, amenities, rules, rating (denormalized), blockedDates
   - Indexes: `{ host: 1 }`, `{ status: 1 }`, `{ 'location.city': 1 }`, `{ 'pricing.basePrice': 1 }`, `{ 'location.coordinates': '2dsphere' }`, `{ 'rating.average': -1 }`, compound `{ status, city, price }`
 
-- [ ] `server/src/models/Booking.ts`
+- [ ] `server/src/models/Booking.js`
   - Fields: listing, guest, host (denormalized), checkIn, checkOut, nights, guests, pricing snapshot, status, payment sub-doc
   - Indexes: `{ guest: 1 }`, `{ host: 1 }`, `{ listing: 1 }`, `{ 'payment.stripeSessionId': 1 }` unique sparse, `{ listing, checkIn, checkOut }` for conflict check
 
-- [ ] `server/src/models/Review.ts`
+- [ ] `server/src/models/Review.js`
   - Fields: booking, reviewer, reviewee, listing, direction, ratings sub-doc, comment
   - Unique index: `{ booking: 1, direction: 1 }`
 
-- [ ] `server/src/models/Payment.ts`
+- [ ] `server/src/models/Payment.js`
   - Fields: booking, user, amount, currency, status, stripe sub-doc
   - Indexes: `{ 'stripe.sessionId': 1 }` unique, `{ 'stripe.paymentIntentId': 1 }` unique sparse
 
-- [ ] Create `server/src/scripts/createIndexes.ts` — run once on deploy
-- [ ] Create shared TypeScript interfaces in `server/src/types/index.ts`
+- [ ] Create `server/src/scripts/createIndexes.js` — run once on deploy
+- [ ] Create shared TypeScript interfaces in `server/src/types/index.js`
 
 ### Postman
 
@@ -503,20 +499,20 @@ Logout   ──► remove hash   ──► clear cookie ──► 200
 
 ### Backend Tasks
 
-- [ ] `server/src/utils/jwt.ts` — `signAccessToken()`, `signRefreshToken()`, `verifyToken()`
-- [ ] `server/src/services/auth.service.ts`
+- [ ] `server/src/utils/jwt.js` — `signAccessToken()`, `signRefreshToken()`, `verifyToken()`
+- [ ] `server/src/services/auth.service.js`
   - `register()` — validate unique email, hash, create user, generate tokens
   - `login()` — find user, compare password, generate tokens
   - `refreshToken()` — verify cookie token, rotate, return new access token
   - `logout()` — remove token hash from `User.refreshTokens[]`
   - `forgotPassword()` — generate reset token, send email
   - `resetPassword()` — verify token, update password
-- [ ] `server/src/controllers/auth.controller.ts` — HTTP layer only, calls service
-- [ ] `server/src/routes/auth.routes.ts` — register all 6 auth routes with rate limiter
-- [ ] `server/src/middleware/auth.middleware.ts` — verify JWT, attach `req.user`
-- [ ] `server/src/middleware/role.middleware.ts` — check `req.user.role`
-- [ ] `server/src/utils/validators/auth.validator.ts` — Zod schemas for all auth bodies
-- [ ] Register routes in `app.ts`
+- [ ] `server/src/controllers/auth.controller.js` — HTTP layer only, calls service
+- [ ] `server/src/routes/auth.routes.js` — register all 6 auth routes with rate limiter
+- [ ] `server/src/middleware/auth.middleware.js` — verify JWT, attach `req.user`
+- [ ] `server/src/middleware/role.middleware.js` — check `req.user.role`
+- [ ] `server/src/utils/validators/auth.validator.js` — express-validator schemas for all auth bodies
+- [ ] Register routes in `app.js`
 
 ### Postman Tests
 
@@ -549,12 +545,12 @@ Delete ──► soft delete (status: inactive) + unlink files
 
 ### Backend Tasks
 
-- [ ] `server/src/middleware/upload.middleware.ts`
+- [ ] `server/src/middleware/upload.middleware.js`
   - Multer disk storage to `public/uploads/listings/`
   - Filename: `{timestamp}-{uuid}.{ext}`
   - Validate MIME type (jpeg, png, webp, gif) and size (max 5MB)
   - Max 10 files
-- [ ] `server/src/services/listing.service.ts`
+- [ ] `server/src/services/listing.service.js`
   - `searchListings()` — filters, geo query, pagination, `.lean()`
   - `getListingById()` — populate host (name, avatar, createdAt only)
   - `createListing()` — save images, create document
@@ -562,9 +558,9 @@ Delete ──► soft delete (status: inactive) + unlink files
   - `deleteListing()` — set `status: inactive`, unlink images
   - `checkAvailability()` — query bookings for date conflicts
   - `blockDates()` — append to `blockedDates[]`
-- [ ] `server/src/controllers/listing.controller.ts`
-- [ ] `server/src/routes/listing.routes.ts`
-- [ ] `server/src/utils/validators/listing.validator.ts` — Zod schemas
+- [ ] `server/src/controllers/listing.controller.js`
+- [ ] `server/src/routes/listing.routes.js`
+- [ ] `server/src/utils/validators/listing.validator.js` — express-validator schemas
 - [ ] Setup Express static middleware for `/uploads` → `public/uploads/`
 
 ### Postman Tests
@@ -602,17 +598,17 @@ POST /api/bookings
 
 ### Backend Tasks
 
-- [ ] `server/src/services/booking.service.ts`
+- [ ] `server/src/services/booking.service.js`
   - `createBooking()` — fetch listing, recalculate price (NEVER trust client price), atomic conflict check, create booking
   - `getUserBookings()` — paginated, filtered by status
   - `getBookingById()` — ownership check (guest or host)
   - `cancelBooking()` — update status, set `cancelledBy`, trigger refund if confirmed
   - `getHostBookings()` — all bookings for host's listings
   - `calculateTotalPrice()` — `basePrice × nights + cleaningFee + serviceFee%` with weekly/monthly discounts
-- [ ] `server/src/controllers/booking.controller.ts`
-- [ ] `server/src/routes/booking.routes.ts`
-- [ ] `server/src/utils/validators/booking.validator.ts`
-- [ ] `server/src/jobs/expireBookings.ts` — cron job to expire pending bookings after 30 min
+- [ ] `server/src/controllers/booking.controller.js`
+- [ ] `server/src/routes/booking.routes.js`
+- [ ] `server/src/utils/validators/booking.validator.js`
+- [ ] `server/src/jobs/expireBookings.js` — cron job to expire pending bookings after 30 min
 
 ### Postman Tests
 
@@ -644,17 +640,17 @@ CRITICAL: Webhook route must be registered BEFORE express.json()
 
 ### Backend Tasks
 
-- [ ] `server/src/config/stripe.ts` — initialize Stripe client
-- [ ] `server/src/services/stripe.service.ts`
+- [ ] `server/src/config/stripe.js` — initialize Stripe client
+- [ ] `server/src/services/stripe.service.js`
   - `createCheckoutSession()` — create Stripe session with `metadata: { bookingId, userId }`, idempotency key
   - `processRefund()` — calculate refund (100% if >48h, 50% if ≤48h), call `stripe.refunds.create()`
-- [ ] `server/src/controllers/payment.controller.ts`
+- [ ] `server/src/controllers/payment.controller.js`
   - `handleWebhook()` — verify signature, handle `checkout.session.completed` and `payment_intent.payment_failed`
   - Idempotency: check `Payment.findOne({ 'stripe.sessionId': session.id })` before processing
-- [ ] `server/src/routes/payment.routes.ts`
-- [ ] `server/src/utils/validators/payment.validator.ts`
-- [ ] Register webhook route BEFORE `express.json()` in `app.ts`
-- [ ] `server/src/services/email.service.ts` — `sendBookingConfirmation()`, `notifyHostNewBooking()`
+- [ ] `server/src/routes/payment.routes.js`
+- [ ] `server/src/utils/validators/payment.validator.js`
+- [ ] Register webhook route BEFORE `express.json()` in `app.js`
+- [ ] `server/src/services/email.service.js` — `sendBookingConfirmation()`, `notifyHostNewBooking()`
 
 ### Postman Tests
 
@@ -697,13 +693,13 @@ Both reviews are independent and can be written at any time post-stay
 
 ### Backend Tasks
 
-- [ ] `server/src/services/review.service.ts`
+- [ ] `server/src/services/review.service.js`
   - `createReview()` — verify booking is `completed`, check `guestReviewed`/`hostReviewed`, create review, update `Listing.rating.average` and `count`, set reviewed flag on booking
   - `getListingReviews()` — paginated, direction=`guest-to-host`, public only
   - `getUserReviews()` — paginated
-- [ ] `server/src/controllers/review.controller.ts`
-- [ ] `server/src/routes/review.routes.ts`
-- [ ] `server/src/utils/validators/review.validator.ts`
+- [ ] `server/src/controllers/review.controller.js`
+- [ ] `server/src/routes/review.routes.js`
+- [ ] `server/src/utils/validators/review.validator.js`
 
 ### Postman Tests
 
@@ -727,15 +723,15 @@ Both reviews are independent and can be written at any time post-stay
 
 ### Backend Tasks
 
-- [ ] `server/src/services/user.service.ts`
+- [ ] `server/src/services/user.service.js`
   - `getProfile()`, `updateProfile()` (with avatar upload + old file unlink)
   - `getPublicProfile()` — no email returned (SEC-005)
   - `toggleSavedListing()` — add/remove from `User.savedListings[]`
   - `getSavedListings()` — populate listing summaries
-- [ ] `server/src/controllers/user.controller.ts`
-- [ ] `server/src/routes/user.routes.ts`
+- [ ] `server/src/controllers/user.controller.js`
+- [ ] `server/src/routes/user.routes.js`
 - [ ] Admin routes: ban user, approve/deactivate listing, all bookings, stats dashboard
-- [ ] `server/src/utils/validators/user.validator.ts`
+- [ ] `server/src/utils/validators/user.validator.js`
 
 ### Postman Tests
 
@@ -757,20 +753,20 @@ Both reviews are independent and can be written at any time post-stay
 
 ## Phase 9 — Frontend Core
 
-**Goal:** Working React app with routing, auth, listing search, and Zustand/React Query wired up.
+**Goal:** Working React app with routing, auth, listing search, and Context wired up.
 
 ### Tasks
 
 - [ ] Set up React Router with all page routes
-- [ ] `client/src/store/authStore.ts` — Zustand: `user`, `accessToken`, `setUser()`, `clearAuth()`
-- [ ] `client/src/store/filterStore.ts` — Zustand: search filters state
+- [ ] `client/src/context/AuthContext.tsx` — `user`, `setUser()`, `clearAuth()`
+- [ ] `client/src/context/FilterContext.tsx` — search filters state
 - [ ] `client/src/services/api.ts` — axios instance with request interceptor (attach token) and response interceptor (refresh on 401)
-- [ ] `client/src/services/auth.service.ts` — typed wrappers for all auth API calls
-- [ ] `client/src/services/listing.service.ts`
-- [ ] `client/src/services/booking.service.ts`
-- [ ] `client/src/services/payment.service.ts`
-- [ ] `client/src/services/review.service.ts`
-- [ ] `client/src/services/user.service.ts`
+- [ ] `client/src/services/auth.service.js` — typed wrappers for all auth API calls
+- [ ] `client/src/services/listing.service.js`
+- [ ] `client/src/services/booking.service.js`
+- [ ] `client/src/services/payment.service.js`
+- [ ] `client/src/services/review.service.js`
+- [ ] `client/src/services/user.service.js`
 - [ ] Auth pages: `Login.tsx`, `Register.tsx` — form + validation + redirect
 - [ ] `components/layout/Header.tsx` — nav with auth state
 - [ ] Home page: listing grid with search bar
@@ -911,7 +907,7 @@ Phase 12 │██████████████████████�
 |---|------|-------|
 | 1 | Booking confirmed ONLY inside Stripe webhook | STRIPE.md |
 | 2 | Price ALWAYS recalculated server-side | STRIPE.md |
-| 3 | Every route with input needs a Zod schema | CODING_GUIDELINES R-003 |
+| 3 | Every route with input needs a express-validator schema | CODING_GUIDELINES R-003 |
 | 4 | Role checks in `roleMiddleware`, never controllers | CODING_GUIDELINES R-004 |
 | 5 | Webhook uses `express.raw()`, registered BEFORE `express.json()` | STRIPE.md |
 | 6 | All async handlers wrapped with `asyncHandler()` | CODING_GUIDELINES R-005 |
@@ -943,11 +939,11 @@ Phase 12 │██████████████████████�
 | Frontend | React + TypeScript | 18.x |
 | Build Tool | Vite | 5.x |
 | Styling | TailwindCSS | 3.x |
-| UI State | Zustand | 4.x |
-| Server State | TanStack React Query | 5.x |
+| UI State | React Context | 19.x |
+| Server State | Custom Hooks / useEffect | 19.x |
 | HTTP Client | Axios | 1.x |
-| Backend | Express + TypeScript | 4.x |
-| Validation | Zod | 3.x |
+| Backend | Express + Vanilla JS | 4.x |
+| Validation | express-validator | 3.x |
 | Auth | JWT + bcrypt | — |
 | Database | MongoDB + Mongoose | 7.x / 8.x |
 | Payments | Stripe Checkout | 2024-06-20 |
