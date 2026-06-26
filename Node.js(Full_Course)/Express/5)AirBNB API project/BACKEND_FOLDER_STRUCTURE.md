@@ -97,3 +97,30 @@ When a user clicks "Submit" on a form:
 5. **Service**, which does the complex math and uses the...
 6. **Model** to save the data into the Database!
 7. Finally, the **Controller** sends a "Success!" message back to the user's screen.
+
+---
+
+## ❓ Common Question: Frontend `config` vs Backend `config`
+
+It is very common to get confused about the `config/` folder because it means slightly different things in Frontend (React) vs Backend (Node.js).
+
+### 1. The Frontend (React) `config/`
+In React, your app is a **Client**. Its main job is to *talk to the outside world*. 
+In a React `config` folder, you usually configure **how you communicate**:
+*   Setting up Axios instances.
+*   Storing the Base URL (`http://localhost:3000`).
+*   Configuring default Headers (like `Content-Type: application/json`).
+*   Setting up interceptors to automatically attach your `accessToken` to every request.
+*(Note: React doesn't have true "secrets" because any code sent to the browser can technically be viewed by the user).*
+
+### 2. The Backend (Node.js) `config/`
+In Node.js, your app is a **Server**. Its main job is to *protect the data and run the business*. 
+In a Node.js `config` folder, you configure **your internal environment and security**:
+*   Loading hidden environment variables from `.env` using `config/env.js`.
+*   Validating your ultra-secret Database Passwords.
+*   Securing your JWT Secret Keys (`ACCESS_TOKEN_SECRET`).
+*   If your JWT Secret Keys were hardcoded in your app instead of loaded through a secure `config/env.js`, any developer who downloads your code could generate their own Admin tokens and hack your database!
+
+**TL;DR:**
+*   **React Config** = "How do I talk to the backend?" (Headers, URLs, Axios)
+*   **Node.js Config** = "How do I securely run this machine?" (Passwords, Ports, Secret Keys)
