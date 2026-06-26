@@ -7,9 +7,8 @@
 ├── backend/
 │   ├── config/             # Configuration files
 │   ├── controllers/        # Route handlers (authController, homeController, etc.)
-│   ├── data/               # JSON storage (homes.json, users.json)
 │   ├── middlewares/        # Custom middlewares (authMiddleware.js)
-│   ├── models/             # Data logic (home.js, user.js)
+│   ├── models/             # Mongoose Schemas & Models (home.js, user.js)
 │   ├── routes/             # Express routers (authRoutes, hostRouter, useRouter)
 │   ├── services/           # Business logic abstraction (if used)
 │   ├── utils/              # Helper utilities
@@ -33,4 +32,4 @@
 
 ## Quality Bar
 - ESLint is configured for the frontend. Before pushing code, ensure `npm run lint` passes without errors.
-- Ensure all incoming data is validated using `express-validator` to prevent corrupt data in JSON files.
+- Ensure all incoming data is validated using `express-validator` to prevent corrupt data from reaching the database.

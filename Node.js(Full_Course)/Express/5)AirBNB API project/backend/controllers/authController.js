@@ -26,6 +26,18 @@ exports.login = (req, res, next) => {
       return res.status(statusCode).json({ status: "fail", message: err.error });
     }
 
+    res.cookie('jwt', tokens.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    res.cookie('refreshToken', tokens.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
     res.status(200).json({
       status: "success",
       message: "Logged in successfully",
@@ -41,6 +53,18 @@ exports.refreshToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ status: "fail", message: err.error });
     }
+
+    res.cookie('jwt', newTokens.accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 15 * 60 * 1000 
+    });
+
+    res.cookie('refreshToken', newTokens.refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 7 * 24 * 60 * 60 * 1000 
+    });
 
     res.status(200).json({
       status: "success",
@@ -61,6 +85,9 @@ exports.logout = (req, res, next) => {
       const statusCode = err.error === "User not found" ? 404 : 500;
       return res.status(statusCode).json({ status: "fail", message: err.error });
     }
+
+    res.clearCookie('jwt');
+    res.clearCookie('refreshToken');
 
     res.status(200).json({
       status: "success",

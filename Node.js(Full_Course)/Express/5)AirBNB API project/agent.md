@@ -13,19 +13,17 @@ This repository contains a decoupled full-stack web application implementing a p
 
 ---
 
-## 💾 2. Data Persistence Strategy (NO DATABASE)
-**WARNING**: This project does NOT use a traditional relational or NoSQL database (e.g., PostgreSQL, MongoDB). 
-- All data is persisted to the local filesystem using Node.js `fs` module.
-- **Data Location**: `backend/data/` (`homes.json`, `users.json`).
-- **Read/Write Rules**: 
-  - ALWAYS use asynchronous file operations (`fs.readFile`, `fs.writeFile`). 
-  - NEVER use synchronous operations (`readFileSync`, `writeFileSync`) as they block the event loop.
-  - Data shape modifications must strictly align with schemas documented in `docs/DATABASE_SCHEMA.md`.
+## 💾 2. Data Persistence Strategy (MongoDB Atlas)
+- This project uses **MongoDB Atlas** as its primary NoSQL database.
+- **ORM/ODM**: Mongoose is used for object data modeling.
+- **Connection**: Managed via `backend/config/db.js` using the `MONGO_URI` environment variable.
+- **Data Models**: All schemas and models are defined in `backend/models/`.
+- Data shape modifications must strictly align with Mongoose schemas documented in `docs/DATABASE_SCHEMA.md`.
 
 ---
 
 ## 🔒 3. Security & Authorization
-- **Authentication Standard**: Stateless JSON Web Tokens (JWT).
+- **Authentication Standard**: Stateless JSON Web Tokens (JWT) stored securely in `httpOnly` cookies to prevent XSS.
 - **Password Handling**: NEVER store plain-text passwords. Ensure all passwords are cryptographically hashed using `bcryptjs` prior to storage.
 - **Role-Based Access Control (RBAC)**: Protected routes must enforce the `verifyToken` and `authorizeRoles('admin', 'host')` middlewares.
 - **Sanitization**: All incoming HTTP payloads (Params, Queries, Body) MUST be validated and sanitized using `express-validator` within `backend/validations/` before reaching controller logic.

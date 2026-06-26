@@ -5,10 +5,12 @@ The Express backend relies on a sequential middleware pipeline defined in `app.j
 
 ## 1. Global Pre-Processing
 ```javascript
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 ```
-- Ensures all incoming request bodies are parsed correctly as JSON.
+- Configures cross-origin requests, parses incoming `httpOnly` cookies, and ensures request bodies are parsed as JSON.
 
 ## 2. Route Handling (Routers as Middleware)
 ```javascript

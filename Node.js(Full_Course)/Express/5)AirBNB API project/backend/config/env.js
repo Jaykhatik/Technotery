@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 // Define exactly what environment variables our app needs to survive
-const requiredEnvVars = ["PORT", "ACCESS_TOKEN_SECRET", "REFRESH_TOKEN_SECRET"];
+const requiredEnvVars = ["PORT", "ACCESS_TOKEN_SECRET", "REFRESH_TOKEN_SECRET", "MONGO_URI"];
 
 // Validate that every required variable actually exists
 requiredEnvVars.forEach((envVar) => {
@@ -17,4 +17,5 @@ module.exports = {
   PORT: process.env.PORT,
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+  MONGO_URI: process.env.MONGO_URI,
 };

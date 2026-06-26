@@ -18,8 +18,9 @@ The main entities are:
 - **Framework**: Express.js (^5.2.1)
 - **Authentication**: jsonwebtoken (^9.0.3), bcryptjs (^3.0.3)
 - **Validation**: express-validator (^7.3.2)
-- **Data Storage**: Local JSON files (fs module) + uuid (^14.0.1) for IDs
+- **Data Storage**: MongoDB Atlas via mongoose
 - **Dev Tools**: nodemon (^3.1.14), dotenv (^17.4.2)
+- **Security & Network**: cors, cookie-parser
 
 ### Frontend
 - **Framework**: React (^19.2.7) with TypeScript (~6.0.2)
@@ -28,9 +29,9 @@ The main entities are:
 - **Linting**: ESLint (^10.5.0)
 
 ## Architecture Intent
-The backend is designed as a pure REST JSON API. It is decoupled from the frontend, meaning it strictly serves and consumes JSON payloads rather than server-rendered HTML. A clear MVC (Model-View-Controller) pattern is partially applied, with models handling file reads/writes, and controllers orchestrating the HTTP cycle.
+The backend is designed as a pure REST JSON API. It is decoupled from the frontend, meaning it strictly serves and consumes JSON payloads rather than server-rendered HTML. A clear MVC (Model-View-Controller) pattern is applied, with Mongoose models handling database operations, and controllers orchestrating the HTTP cycle.
 
 ## Runtime Constraints
 - The backend runs on `localhost` (default port mapped in `.env`).
-- Persistence relies on filesystem writes (`fs.writeFile`). Not suited for distributed systems without refactoring.
+- Persistence relies on MongoDB Atlas, making the backend stateless and scalable.
 - The frontend expects the backend to be running simultaneously to fetch data.
